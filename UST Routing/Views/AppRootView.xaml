@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 													xmlns:cal="http://www.caliburnproject.org"
              xmlns:viewModels="clr-namespace:UST_Routing.ViewModels"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance viewModels:AppRootViewModel, IsDesignTimeCreatable=True}"
 													StateAssist.State1="{Binding AppModePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -16,267 +15,25 @@
 			<VisualStateGroup Name="AppModePages">
 				<VisualState Name="LoginViewPage">
 					<Storyboard>
-						<Storyboard	BeginTime="0:0:0.2">
-							<ScopedStoryboard Storyboard.TargetName="MainView"
-																									Duration="0:0:0.25">
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																									To="200"
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																									To="0" 
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-									<DiscreteObjectKeyFrame KeyTime="0:0:0">
-										<DiscreteObjectKeyFrame.Value>
-											<system:Boolean>False</system:Boolean>
-										</DiscreteObjectKeyFrame.Value>
-									</DiscreteObjectKeyFrame>
-								</ObjectAnimationUsingKeyFrames>
-
-							</ScopedStoryboard>
-						</Storyboard>
-
-						<Storyboard	BeginTime="0:0:0.2">
-							<ScopedStoryboard Storyboard.TargetName="RegisterView"
-																									Duration="0:0:0.25">
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																									To="200"
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																									To="0" 
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-									<DiscreteObjectKeyFrame KeyTime="0:0:0">
-										<DiscreteObjectKeyFrame.Value>
-											<system:Boolean>False</system:Boolean>
-										</DiscreteObjectKeyFrame.Value>
-									</DiscreteObjectKeyFrame>
-								</ObjectAnimationUsingKeyFrames>
-
-							</ScopedStoryboard>
-						</Storyboard>
-						
-						<ScopedStoryboard Storyboard.TargetName="LoginView"
-																								BeginTime="0:0:0.7"
-																								Duration="0:0:0.3">
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																								From=".5"	
-																								To="1" 
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																								From=".5"	
-																								To="1"
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																								From="-140"
-																								To="0"
-																								EasingFunction="{Ease Out, Quart}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																								To="1" 
-																								EasingFunction="{Ease In, Quad}"/>
-
-
-							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-								<DiscreteObjectKeyFrame KeyTime="0:0:0">
-									<DiscreteObjectKeyFrame.Value>
-										<system:Boolean>True</system:Boolean>
-									</DiscreteObjectKeyFrame.Value>
-								</DiscreteObjectKeyFrame>
-							</ObjectAnimationUsingKeyFrames>
-						</ScopedStoryboard>
+						<ContractElementStoryboardTemplate TargetName="MainView"/>
+						<ContractElementStoryboardTemplate TargetName="RegisterView"/>
+						<ExpandElementStoryboardTemplate TargetName="LoginView"/>
 					</Storyboard>
 				</VisualState>
 				
 				<VisualState Name="RegisterViewPage">
 					<Storyboard>
-						<Storyboard	BeginTime="0:0:0.2">
-							<ScopedStoryboard Storyboard.TargetName="MainView"
-																									Duration="0:0:0.25">
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																									To="200"
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																									To="0" 
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-									<DiscreteObjectKeyFrame KeyTime="0:0:0">
-										<DiscreteObjectKeyFrame.Value>
-											<system:Boolean>False</system:Boolean>
-										</DiscreteObjectKeyFrame.Value>
-									</DiscreteObjectKeyFrame>
-								</ObjectAnimationUsingKeyFrames>
-
-							</ScopedStoryboard>
-						</Storyboard>
-
-						<Storyboard	BeginTime="0:0:0.2">
-							<ScopedStoryboard Storyboard.TargetName="LoginView"
-																									Duration="0:0:0.25">
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																									To="200"
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																									To="0" 
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-									<DiscreteObjectKeyFrame KeyTime="0:0:0">
-										<DiscreteObjectKeyFrame.Value>
-											<system:Boolean>False</system:Boolean>
-										</DiscreteObjectKeyFrame.Value>
-									</DiscreteObjectKeyFrame>
-								</ObjectAnimationUsingKeyFrames>
-
-							</ScopedStoryboard>
-						</Storyboard>
-
-						<ScopedStoryboard Storyboard.TargetName="LoginView"
-																								BeginTime="0:0:0.7"
-																								Duration="0:0:0.3">
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																								From=".5"	
-																								To="1" 
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																								From=".5"	
-																								To="1"
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																								From="-140"
-																								To="0"
-																								EasingFunction="{Ease Out, Quart}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																								To="1" 
-																								EasingFunction="{Ease In, Quad}"/>
-
-
-							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-								<DiscreteObjectKeyFrame KeyTime="0:0:0">
-									<DiscreteObjectKeyFrame.Value>
-										<system:Boolean>True</system:Boolean>
-									</DiscreteObjectKeyFrame.Value>
-								</DiscreteObjectKeyFrame>
-							</ObjectAnimationUsingKeyFrames>
-						</ScopedStoryboard>
+						<ContractElementStoryboardTemplate TargetName="MainView"/>
+						<ContractElementStoryboardTemplate TargetName="LoginView"/>
+						<ExpandElementStoryboardTemplate TargetName="RegisterView"/>
 					</Storyboard>
 				</VisualState>
 
 				<VisualState Name="MainViewPage">
 					<Storyboard>
-						<Storyboard	BeginTime="0:0:0.2">
-							<ScopedStoryboard Storyboard.TargetName="LoginView"
-																									Duration="0:0:0.25">
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																									To="0.5" 
-																									EasingFunction="{Ease In, Cubic}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																									To="200"
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																									To="0" 
-																									EasingFunction="{Ease In, Quad}"/>
-
-								<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-									<DiscreteObjectKeyFrame KeyTime="0:0:0">
-										<DiscreteObjectKeyFrame.Value>
-											<system:Boolean>False</system:Boolean>
-										</DiscreteObjectKeyFrame.Value>
-									</DiscreteObjectKeyFrame>
-								</ObjectAnimationUsingKeyFrames>
-
-							</ScopedStoryboard>
-						</Storyboard>
-
-						<ScopedStoryboard Storyboard.TargetName="MainView"
-																								BeginTime="0:0:0.7"
-																								Duration="0:0:0.3">
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-																								From=".5"	
-																								To="1" 
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-																								From=".5"	
-																								To="1"
-																								EasingFunction="{Ease Out, Cubic}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
-																								From="-140"
-																								To="0"
-																								EasingFunction="{Ease Out, Quart}"/>
-
-							<DoubleAnimation Storyboard.TargetProperty="Opacity"
-																								To="1" 
-																								EasingFunction="{Ease In, Quad}"/>
-
-
-							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
-																																						Duration="0:0:0">
-								<DiscreteObjectKeyFrame KeyTime="0:0:0">
-									<DiscreteObjectKeyFrame.Value>
-										<system:Boolean>True</system:Boolean>
-									</DiscreteObjectKeyFrame.Value>
-								</DiscreteObjectKeyFrame>
-							</ObjectAnimationUsingKeyFrames>
-						</ScopedStoryboard>
+						<ContractElementStoryboardTemplate TargetName="LoginView"/>
+						<ContractElementStoryboardTemplate TargetName="RegisterView"/>
+						<ExpandElementStoryboardTemplate TargetName="MainView"/>
 					</Storyboard>
 				</VisualState>
 
@@ -285,13 +42,13 @@
 		</VisualStateManager.VisualStateGroups>
 
 		<ContentControl x:Name="MainView"
-																		Style="{StaticResource FullScreenView_Contracted}"/>
+																		Style="{StaticResource ModalPopup_Contracted}"/>
 		
 		<ContentControl x:Name="LoginView"
-																		Style="{StaticResource ModalPopup_Contracted}"/>
+																		Style="{StaticResource ModalPopup_Expanded}"/>
 
-		<ContentControl x:Name="SignUpView"
-																		Style="{StaticResource FullScreenView_Contracted}"/>
+		<ContentControl x:Name="RegisterView"
+																		Style="{StaticResource ModalPopup_Contracted}"/>
 	</Grid>
 </UserControl>
 

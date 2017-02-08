@@ -59,6 +59,7 @@ namespace UST_Routing.ViewModels
 		public ICommand SwitchToRegisterViewCommand => new FlexCommand(
 			o =>
 			{
+				_parentViewModel.AppModePage = AppRootViewModel.AppModePages.RegisterViewPage;
 			});
 
 

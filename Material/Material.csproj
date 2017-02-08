@@ -66,7 +66,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation\ContractElementStoryboard.cs" />
     <Compile Include="Animation\ScopedStoryboard.cs" />
+    <Compile Include="Animation\Templating\ContractElementStoryboardTemplate.cs" />
+    <Compile Include="Animation\Templating\ExpandElementStoryboardTemplate.cs" />
+    <Compile Include="Animation\Templating\StoryboardTemplate.cs" />
+    <Compile Include="Controls\Adapters\TextFieldInputDataAdapter.cs" />
     <Compile Include="Controls\Behaviors\AbstractElementProxyService.cs" />
     <Compile Include="Controls\Behaviors\CustomWindowCommandBinder.cs" />
     <Compile Include="Controls\Behaviors\HintAssist.cs" />
@@ -166,12 +171,14 @@
     <Compile Include="Design\Text\TextualStyle.Binding.cs" />
     <Compile Include="Design\Text\TextualStyle.cs" />
     <Compile Include="Design\Text\TextualStyleRenderingAllocator.cs" />
+    <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IntrinsicExtensions.cs" />
     <Compile Include="Extensions\MediaExtensions.cs" />
     <Compile Include="Markup\Converters\BrushToRadialGradientBrushConverter.cs" />
     <Compile Include="Markup\Converters\ClockLineConverter.cs" />
     <Compile Include="Markup\Converters\ConditionalMaterialInverter.cs" />
+    <Compile Include="Markup\Converters\HasValidatorToVisibilityConverter.cs" />
     <Compile Include="Markup\Converters\LengthDescriptorResolverConverter.cs" />
     <Compile Include="Markup\Converters\MaterialDescriptorToBrushConverter.cs" />
     <Compile Include="Markup\Converters\MaterialProviderFirstBrushConverter.cs" />

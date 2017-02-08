@@ -2,7 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Material.Controls"
                     xmlns:converters="clr-namespace:Material.Converters"
-                    xmlns:behaviors="clr-namespace:Material.Controls.Behaviors">
+                    xmlns:behaviors="clr-namespace:Material.Controls.Behaviors"
+                    xmlns:primitives="clr-namespace:Material.Controls.Primitives"
+                    xmlns:validation="clr-namespace:Material.Controls.Validation"
+                    xmlns:converters1="clr-namespace:Material.Markup.Converters">
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="Material.Fonts.xaml"/>
 		<ResourceDictionary Source="Material.Palette.xaml"/>
@@ -13,10 +16,12 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<Style TargetType="TextBox" BasedOn="{StaticResource t15pSubhead}" x:Key="HintedTextBox">
-		<Setter Property="MinHeight" Value="50"/>
+		<!--<Setter Property="MinHeight" Value="50"/>-->
 		<Setter Property="BorderBrush" Value="{StaticResource mtGrey600}"/>
 		<Setter Property="CaretBrush" Value="{StaticResource mtBlueGrey800}"/>
 		<Setter Property="HorizontalContentAlignment" Value="Left"/>
+		<Setter Property="primitives:MD.Theme" Value="{StaticResource Teal}"/>
+		<Setter Property="Margin" Value="5 3"/>
 		<!--<Setter Property="behaviors:HintAssist.VisualStateManagerService">
 			<Setter.Value>
 				<behaviors:HintVisualStateManagerService/>
@@ -35,7 +40,7 @@
 																											To="1" 
 																											Duration="0:0:0.12" 
 																											EasingFunction="{Ease Out, Quad}"/>
-										
+
 										<DoubleAnimation Storyboard.TargetName="PART_Scale" 
 																											Storyboard.TargetProperty="ScaleX" 
 																											To="1" 
@@ -53,7 +58,7 @@
 																											To="-3" 
 																											Duration="0:0:0.12" 
 																											EasingFunction="{Ease Out, Quad}"/>
-										
+
 									</Storyboard>
 								</VisualState>
 								<VisualState Name="HintSmall">
@@ -63,7 +68,7 @@
 																											To=".6"
 																											Duration="0:0:0.12"
 																											EasingFunction="{Ease In, Quad}"/>
-										
+
 										<DoubleAnimation Storyboard.TargetName="PART_Scale" 
 																											Storyboard.TargetProperty="ScaleX"
 																											To=".6"
@@ -90,7 +95,7 @@
 																											To="0" 
 																											Duration="0:0:0.12" 
 																											EasingFunction="{Ease Out, Quad}"/>
-										
+
 										<DoubleAnimation Storyboard.TargetName="PART_Scale" 
 																											Storyboard.TargetProperty="ScaleX"
 																											To="0" 
@@ -112,6 +117,47 @@
 									</Storyboard>
 								</VisualState>
 							</VisualStateGroup>
+							<VisualStateGroup Name="ValidationVisualStates">
+								<VisualState Name="NoValidation">
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_FocusRectangle" 
+																										Storyboard.TargetProperty="Fill" 
+																										To="{StaticResource mtGrey500}" 
+																										Duration="0:0:0.12"/>
+										<BrushAnimation Storyboard.TargetName="PART_ValidationMessage" 
+																										Storyboard.TargetProperty="Foreground" 
+																										To="{StaticResource mtGrey500}" 
+																										Duration="0:0:0.12"/>
+
+									</Storyboard>
+								</VisualState>
+								<VisualState Name="ValidationFailed">
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_FocusRectangle" 
+																										Storyboard.TargetProperty="Fill" 
+																										To="{StaticResource mtRed500}" 
+																										Duration="0:0:0.12"/>
+
+										<BrushAnimation Storyboard.TargetName="PART_ValidationMessage" 
+																										Storyboard.TargetProperty="Foreground" 
+																										To="{StaticResource mtRed500}" 
+																										Duration="0:0:0.12"/>
+
+									</Storyboard>
+								</VisualState>
+								<VisualState Name="ValidationPassed">
+									<Storyboard>
+										<BrushAnimation Storyboard.TargetName="PART_FocusRectangle" 
+																										Storyboard.TargetProperty="Fill" 
+																										To="{StaticResource mtGreen500}" 
+																										Duration="0:0:0.12"/>
+										<BrushAnimation Storyboard.TargetName="PART_ValidationMessage" 
+																										Storyboard.TargetProperty="Foreground" 
+																										To="{StaticResource mtGreen500}" 
+																										Duration="0:0:0.12"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="PART_RootBorder"
@@ -122,56 +168,87 @@
 									<ColumnDefinition Width="Auto"/>
 									<ColumnDefinition />
 								</Grid.ColumnDefinitions>
-								<Viewbox Height="40" Width="40">
+								<Viewbox Width="40" Height="40">
 									<!--<Viewbox.Height>
 										<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
 									</Viewbox.Height>
 									<Viewbox.Width>
 										<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
 									</Viewbox.Width>-->
-									<Path Style="{StaticResource drawable}"
-															Data="{Binding Path=(behaviors:HintAssist.IconGeometry), RelativeSource={RelativeSource TemplatedParent}}" 
-															Fill="{TemplateBinding Foreground}"/>
+									<Canvas>
+										<Path Style="{StaticResource drawable}"
+																Data="{Binding Path=(behaviors:HintAssist.IconGeometry), RelativeSource={RelativeSource TemplatedParent}}" 
+																Fill="{TemplateBinding Foreground}"/>
+									</Canvas>
 								</Viewbox>
-								<ScrollViewer x:Name="PART_ContentHost"
-																						Grid.Column="1"
-																						Margin="5 2"
+								<Grid Column="1">
+									<StackPanel Orientation="Vertical">
+										<Grid Margin="7 4">
+											<Label x:Name="PART_Hint" 
+																		HorizontalContentAlignment="Left"
+																		RenderTransformOrigin="0,0" 
+																		IsHitTestVisible="False"
+																		Padding="0"
+																		Foreground="{TemplateBinding Foreground}">
+												<Label.Content>
+													<Binding Path="(behaviors:HintAssist.Hint)" RelativeSource="{RelativeSource TemplatedParent}"/>
+												</Label.Content>
+												<Label.Opacity>
+													<Binding Path="(behaviors:HintAssist.HintOpacity)" RelativeSource="{RelativeSource TemplatedParent}"/>
+												</Label.Opacity>
+												<Label.RenderTransform>
+													<TransformGroup>
+														<ScaleTransform x:Name="PART_Scale" ScaleX="1" ScaleY="1"/>
+														<TranslateTransform x:Name="PART_HintTranslate"/>
+													</TransformGroup>
+												</Label.RenderTransform>
+											</Label>
+											<ScrollViewer x:Name="PART_ContentHost"
 																						VerticalScrollBarVisibility="Disabled"
 																						HorizontalAlignment="Stretch"
-																					 VerticalAlignment="Stretch"
 																						HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 																						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 																						TextElement.FontFamily="{TemplateBinding FontFamily}"
 																						TextElement.FontSize="{TemplateBinding FontSize}"	
 																						TextElement.FontWeight="{TemplateBinding FontWeight}"
 																						TextElement.Foreground="{TemplateBinding Foreground}">
-									<ScrollViewer.RenderTransform>
-										<TranslateTransform x:Name="PART_ContentScale" X="0" Y="0"/>
-									</ScrollViewer.RenderTransform>
-								</ScrollViewer>
-								<Label x:Name="PART_Hint" 
-															Grid.Column="1"
-								       HorizontalContentAlignment="Left"
-															RenderTransformOrigin="0,0" 
-															IsHitTestVisible="False"
-															Content="{Binding Path=(behaviors:HintAssist.Hint), RelativeSource={RelativeSource TemplatedParent}}" 
-															Foreground="{TemplateBinding Foreground}">
-									<Label.Opacity>
-										<Binding RelativeSource="{RelativeSource TemplatedParent}" Path="(behaviors:HintAssist.HintOpacity)"/>
-									</Label.Opacity>
-									<Label.RenderTransform>
-										<TransformGroup>
-											<ScaleTransform x:Name="PART_Scale" ScaleX="1" ScaleY="1"/>
-											<TranslateTransform x:Name="PART_HintTranslate"/>
-										</TransformGroup>
-									</Label.RenderTransform>
-								</Label>
+												<ScrollViewer.RenderTransform>
+													<TranslateTransform x:Name="PART_ContentScale" X="0" Y="0"/>
+												</ScrollViewer.RenderTransform>
+											</ScrollViewer>
+										</Grid>
+										<Label x:Name="PART_ValidationMessage" 
+																	HorizontalContentAlignment="Left"
+																	RenderTransformOrigin="0,0" 
+																	IsHitTestVisible="False"
+																	Padding="0"
+										       Foreground="{TemplateBinding Foreground}">
+											<Label.Visibility>
+												<Binding Path="(behaviors:HintAssist.Validator)" 
+																					RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{converters1:HasValidatorToVisibilityConverter}"/>
+											</Label.Visibility>
+											<Label.Content>
+												<Binding Path="(behaviors:HintAssist.Validator).(validation:StringValidator.Message)" 
+																					RelativeSource="{RelativeSource TemplatedParent}"/>
+											</Label.Content>
+											<Label.LayoutTransform>
+												<TransformGroup>
+													<ScaleTransform x:Name="PART_ValidationScale" ScaleX=".5" ScaleY=".5"/>
+													<TranslateTransform x:Name="PART_ValidationTranslate"/>
+												</TransformGroup>
+											</Label.LayoutTransform>
+										</Label>
+									</StackPanel>
+								</Grid>
+
+
 								<Rectangle x:Name="PART_FocusRectangle" 
 																			Grid.ColumnSpan="2"
 																			VerticalAlignment="Bottom"
 																			Height="2" 
 																			RenderTransformOrigin=".5,.5" 
-																			Fill="{StaticResource mtBlue400}">
+																			Fill="{StaticResource mtTeal500}">
 									<Rectangle.RenderTransform>
 										<ScaleTransform ScaleY="1" ScaleX="0"/>
 									</Rectangle.RenderTransform>
@@ -188,6 +265,8 @@
 																											Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
 																											To="1"
 																											Duration="0:0:0.1"/>
+
+
 									</Storyboard>
 								</BeginStoryboard>
 							</EventTrigger.Actions>
@@ -211,7 +290,7 @@
 	</Style>
 
 
-	
+
 	<Style TargetType="TextBox" BasedOn="{StaticResource t15pSubhead}" x:Key="HintedRaisedTextBox">
 		<Setter Property="TextWrapping" Value="Wrap"/>
 		<Setter Property="Foreground" Value="{StaticResource mtGrey900}"/>

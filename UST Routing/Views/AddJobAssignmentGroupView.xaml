@@ -11,7 +11,96 @@
 													StateAssist.State1="{Binding AddJobAssignmentGroupState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 													cal:Bind.AtDesignTime="True"
 													Designer.Viewport="HD720">
-	<UserControl.Resources>
+	<Grid Background="White">
+		<StackPanel Margin="50">
+
+			<Grid>
+
+				<Border x:Name="PART_RootBorder"
+														BorderThickness="0 0 0 1"
+														BorderBrush="{StaticResource mtGrey500 }">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Viewbox>
+							<Viewbox.Height>
+								<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
+							</Viewbox.Height>
+							<Viewbox.Width>
+								<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+							</Viewbox.Width>
+							<Canvas Width="24" Height="24">
+								<Path Style="{StaticResource drawablelock}"
+																Fill="{StaticResource mtTeal500}"/>
+							</Canvas>
+						</Viewbox>
+						<Grid Column="1">
+							<StackPanel Orientation="Vertical" VerticalAlignment="Top">
+								<Label x:Name="PART_Hint" 
+																	HorizontalContentAlignment="Left"
+																	RenderTransformOrigin="0,0" 
+																	IsHitTestVisible="False"
+										       Foreground="{StaticResource mtTeal500}">
+									<Label.Content>
+										Hint
+									</Label.Content>
+									<Label.Opacity>
+										.56
+									</Label.Opacity>
+									<Label.LayoutTransform>
+										<TransformGroup>
+											<ScaleTransform x:Name="PART_Scale" ScaleX="1" ScaleY="1"/>
+											<TranslateTransform x:Name="PART_HintTranslate"/>
+										</TransformGroup>
+									</Label.LayoutTransform>
+								</Label>
+								<ScrollViewer x:Name="PART_ContentHost"
+																						VerticalScrollBarVisibility="Disabled"
+																						HorizontalAlignment="Stretch"
+																						HorizontalContentAlignment="Left"
+																						VerticalContentAlignment="Center">
+									<ScrollViewer.LayoutTransform>
+										<TranslateTransform x:Name="PART_ContentScale" X="0" Y="0"/>
+									</ScrollViewer.LayoutTransform>
+								</ScrollViewer>
+								<Label x:Name="PART_ValidationMessage" 
+																	HorizontalContentAlignment="Left"
+																	RenderTransformOrigin="0,0" 
+																	IsHitTestVisible="False"
+																	Padding="0"
+										       Foreground="{StaticResource mtTeal500}">
+									<Label.Content>
+										Validation Message
+									</Label.Content>
+									<Label.LayoutTransform>
+										<TransformGroup>
+											<ScaleTransform x:Name="PART_ValidationScale" ScaleX=".5" ScaleY=".5"/>
+											<TranslateTransform x:Name="PART_ValidationTranslate"/>
+										</TransformGroup>
+									</Label.LayoutTransform>
+								</Label>
+							</StackPanel>
+						</Grid>
+
+
+						<Rectangle x:Name="PART_FocusRectangle" 
+																			Grid.ColumnSpan="2"
+																			VerticalAlignment="Bottom"
+																			Height="2" 
+																			RenderTransformOrigin=".5,.5" 
+																			Fill="{StaticResource mtTeal500}">
+							<Rectangle.RenderTransform>
+								<ScaleTransform ScaleY="1" ScaleX="0"/>
+							</Rectangle.RenderTransform>
+						</Rectangle>
+					</Grid>
+				</Border>
+			</Grid>
+		</StackPanel>
+	</Grid>
+	<!--<UserControl.Resources>
 
 		<DataTemplate x:Key="AccountWithImageTemplate" DataType="data:Account">
 			<Grid Name="PART_Root" Height="80">
@@ -67,10 +156,12 @@
 																	Foreground="{StaticResource mtGrey300}" 
 																	FontSize="12pt" 
 																	FontWeight="Thin"/>
-						<!--<TextBlock Text="More text" 
+						-->
+	<!--<TextBlock Text="More text" 
 																	Foreground="{StaticResource mtGrey500}" 
 																	FontSize="12pt" 
 																	TextTrimming="CharacterEllipsis"/>-->
+	<!--
 					</StackPanel>
 
 				</Grid>
@@ -167,5 +258,5 @@
 				</Grid>
 			</Grid>
 		</Grid>
-	</Card>
+	</Card>-->
 </UserControl>

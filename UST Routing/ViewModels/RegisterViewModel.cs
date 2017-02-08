@@ -55,6 +55,12 @@ namespace UST_Routing.ViewModels
 			}
 		}
 
+		protected AppRootViewModel _parentReference;
+		public RegisterViewModel(AppRootViewModel parentReference)
+		{
+			_parentReference = parentReference;
+		}
+
 		public ICommand SignUpCommand => new FlexCommand(o =>
 		{
 			var passwordBox = o.As<PasswordBox>();

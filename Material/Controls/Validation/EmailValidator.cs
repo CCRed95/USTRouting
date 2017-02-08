@@ -6,9 +6,11 @@ namespace Material.Controls.Validation
 	{
 		public override bool Validate(string value)
 		{
-			return Regex.IsMatch(value, 
+			var IsEmail = Regex.IsMatch(value, 
 				@"\A([A-z0-9.!#$%&'*+-/=?^_`{|}~()]{1,64})@([^-][A-z0-9-]*)([^-][^.].[A-z]{1,}[A-z]*)\Z",
 				RegexOptions.IgnoreCase);
+			Message = IsEmail ? "good" : "invalid email";
+			return IsEmail;
 		}
 	}
 }

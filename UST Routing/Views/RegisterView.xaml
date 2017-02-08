@@ -41,22 +41,22 @@
 					<TextBox Style="{StaticResource HintedTextBox}" 
 														HintAssist.Hint="Username"
 														HintAssist.IconStyle="{StaticResource drawablesupervisor_account}" 
-														CaretBrush="{StaticResource mtPink800}"
-														Foreground="{StaticResource mtPinkA700}"
+														CaretBrush="{StaticResource mtBlue700}"
+														Foreground="{StaticResource mtBlue700}"
 														Text="{Binding Username}"/>
 
 					<TextBox Style="{StaticResource HintedTextBox}" 
 														HintAssist.Hint="First Name"
 														HintAssist.IconStyle="{StaticResource drawablePresentation}" 
-														CaretBrush="{StaticResource mtPink800}"
-														Foreground="{StaticResource mtPinkA700}"
+														CaretBrush="{StaticResource mtTeal700}"
+														Foreground="{StaticResource mtTeal700}"
 														Text="{Binding FirstName}"/>
 					
 					<TextBox Style="{StaticResource HintedTextBox}" 
 														HintAssist.Hint="Last Name"
 														HintAssist.IconStyle="{StaticResource drawablefind_replace}" 
-														CaretBrush="{StaticResource mtPink800}"
-														Foreground="{StaticResource mtPinkA700}"
+														CaretBrush="{StaticResource mtPurple700}"
+														Foreground="{StaticResource mtPurple700}"
 														Text="{Binding LastName}"/>
 
 					<TextBox Style="{StaticResource HintedTextBox}" 

@@ -1,11 +1,38 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Material.Extensions;
+using MS.Internal;
 
 namespace Material.Animation
 {
 	public class ScopedStoryboard : Storyboard
 	{
+		static ScopedStoryboard()
+		{
+			var windowsBase = Assembly.LoadFile(@"C:\Windows\Microsoft.NET\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll");
+			var type = windowsBase.DefinedTypes.Single(t => t.Name == "FreezableDefaultValueFactory");
+			var ctors = type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance);
+
+			var paramPropertyReference = typeof(TimelineCollection).GetProperty("Empty",
+				BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic);
+
+			var propertyValue = paramPropertyReference.GetValue(null).As<TimelineCollection>();
+			
+			var defaultValue = ctors.First().Invoke(new[] { (Freezable)propertyValue });
+
+			ChildrenProperty.OverrideMetadata(typeof(ScopedStoryboard), new FrameworkPropertyMetadata(defaultValue, onChildrenPropertyChanged));
+		}
+
+		private static void onChildrenPropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			var scopedStorybaord = o.As<ScopedStoryboard>();
+			scopedStorybaord.onChildrenChanged(o, EventArgs.Empty);
+			scopedStorybaord.Children.Changed += scopedStorybaord.onChildrenChanged;
+		}
+
 		public ScopedStoryboard()
 		{
 			Children.Changed += onChildrenChanged;

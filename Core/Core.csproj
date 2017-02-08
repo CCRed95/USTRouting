@@ -71,6 +71,7 @@
     <Compile Include="Animation\Timelines\CornerAnimation.cs" />
     <Compile Include="Animation\Timelines\CornerAnimationBase.cs" />
     <Compile Include="Animation\Timelines\SetterObjectAnimation.cs" />
+    <Compile Include="Animation\Timelines\BrushAnimation.cs" />
     <Compile Include="Collections\CollectionHelpers.cs" />
     <Compile Include="Collections\DataAwareAssist.cs" />
     <Compile Include="Collections\DataAwareData.cs" />

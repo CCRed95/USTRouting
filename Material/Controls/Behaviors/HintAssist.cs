@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Security;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Core.Extensions;
 using Core.Helpers.DependencyHelpers;
 using Material.Controls.Validation;
 using Material.Extensions;
@@ -11,6 +13,12 @@ namespace Material.Controls.Behaviors
 {
 	public static class HintAssist
 	{
+		private enum ValidationVisualStates
+		{
+			NoValidation,
+			ValidationFailed,
+			ValidationPassed
+		}
 		public static readonly DependencyProperty IsFloatingProperty = DependencyProperty.RegisterAttached(
 				"IsFloating",
 				typeof(bool),
@@ -26,7 +34,7 @@ namespace Material.Controls.Behaviors
 		{
 			element.SetValue(IsFloatingProperty, value);
 		}
-		
+
 		/// <summary>
 		/// The hint property
 		/// </summary>
@@ -57,7 +65,7 @@ namespace Material.Controls.Behaviors
 		{
 			return element.GetValue(HintProperty);
 		}
-		
+
 		/// <summary>
 		/// The hint opacity property
 		/// </summary>
@@ -143,17 +151,17 @@ namespace Material.Controls.Behaviors
 		public static readonly DependencyProperty ValidatorProperty =
 			DP.Attach<StringValidator>(typeof(HintAssist), new FrameworkPropertyMetadata(onValidatorChanged));
 
-		private static void onValidatorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-		{
-			var validator = e.NewValue.As<StringValidator>();
-			o.As<IFrameworkInputElement>().TextInput += (s, x) =>
-			{
-				validator.Validate(x.Text);
-			};
-		}
-
 		public static StringValidator GetValidator(DependencyObject i) => i.Get<StringValidator>(ValidatorProperty);
 		public static void SetValidator(DependencyObject i, StringValidator v) => i.Set(ValidatorProperty, v);
+
+
+		private static void onValidatorChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+		{
+			var managerService = GetVisualStateManagerService(o);
+			managerService?.EvaluateValidationState(o.As<FrameworkElement>());
+		}
+
+
 
 
 	}

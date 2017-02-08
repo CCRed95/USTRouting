@@ -1,4 +1,5 @@
-﻿using Core.Data.CachedObjects;
+﻿using System.Text.RegularExpressions;
+using Core.Data.CachedObjects;
 using UST_Routing.Accounts;
 using UST_Routing.Data;
 using UST_Routing.Data.Domain;
@@ -11,6 +12,7 @@ namespace UST_Routing.ViewModels
 		public enum AppModePages
 		{
 			LoginViewPage,
+			RegisterViewPage,
 			MainViewPage
 		}
 
@@ -36,6 +38,17 @@ namespace UST_Routing.ViewModels
 			return new LoginViewModel(i);
 		}
 
+		
+		public static LinqProperty<AppRootViewModel, RegisterViewModel> RegisterViewProperty =
+			LinqPropertyBase.Register<AppRootViewModel, RegisterViewModel>(RegisterViewEvaluator);
+
+		public RegisterViewModel RegisterView => RegisterViewProperty.GetValue(this);
+
+		private static RegisterViewModel RegisterViewEvaluator(AppRootViewModel i)
+		{
+			return new RegisterViewModel(i);
+		}
+		
 
 		public static LinqProperty<AppRootViewModel, MainViewModel> MainViewProperty =
 			LinqPropertyBase.Register<AppRootViewModel, MainViewModel>(MainViewEvaluator);

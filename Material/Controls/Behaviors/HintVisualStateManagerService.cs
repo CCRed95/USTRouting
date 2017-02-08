@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
 using Core.Extensions;
+using Material.Controls.Adapters;
+using Material.Controls.Validation;
 using Material.Extensions;
 
 namespace Material.Controls.Behaviors
@@ -19,13 +22,17 @@ namespace Material.Controls.Behaviors
 
 	public class HintVisualStateManagerService : AbstractElementProxyService<IFrameworkInputElement>
 	{
+		private TextFieldInputDataAdapter _inputDataAdapter;
+
 		protected override void OnElementAttached()
 		{
+			_inputDataAdapter = new TextFieldInputDataAdapter(AttachedElement);
+
 			attachedElement.As<FrameworkElement>().Loaded += OnLoaded;
 			attachedElement.GotKeyboardFocus += OnGotKeyboardFocus;
 			attachedElement.LostKeyboardFocus += OnLostKeyboardFocus;
 			attachedElement.PreviewTextInput += OnPreviewTextInput;
-			attachedElement.TextInput += OnTextInput;
+		//	attachedElement.TextInput += OnTextInput;
 		}
 
 		private void OnLoaded(object s, RoutedEventArgs e)
@@ -53,38 +60,36 @@ namespace Material.Controls.Behaviors
 
 		private void OnLossOfFocus(object s, RoutedEventArgs e)
 		{
-			if (e.Source is TextBox)
-			{
-				var textBox = e.Source.As<TextBox>();
-				textBox.GoToVisualState(textBox.Text.IsNullOrEmpty() ?
-					HintVisualStates.Visible : HintVisualStates.Small);
-			}
-			else if (e.Source is PasswordBox)
-			{
-				var passwordBox = e.Source.As<PasswordBox>();
-				passwordBox.GoToVisualState(passwordBox.Password.IsNullOrEmpty()
-					? HintVisualStates.Visible
-					: HintVisualStates.Small);
-			}
-			else
-			{
-				throw new NotSupportedException();
-			}
-		}
-
-
-		private void OnTextInput(object s, TextCompositionEventArgs e)
-		{
 			var frameworkElement = e.Source.As<FrameworkElement>();
-			frameworkElement
-			if()
+			frameworkElement.GoToVisualState(_inputDataAdapter.Text.IsNullOrEmpty() ? "HintVisible" : "Small");
+			EvaluateValidationState(frameworkElement);
 		}
 
 		private void OnPreviewTextInput(object s, TextCompositionEventArgs e)
 		{
 		}
 
+		public void EvaluateValidationState(FrameworkElement fe)
+		{
+			string targetState;
+			var validator = HintAssist.GetValidator(fe);
+			if (validator == null)
+			{
+				targetState = "NoValidation";
+			}
+			else
+			{
+				if (_inputDataAdapter == null)
+					throw new DataException("The input data adapter has not been initialized.");
+				var effectiveText = _inputDataAdapter.Text;
+				var validationResult = validator.Validate(effectiveText);
+				targetState = validationResult ? "ValidationPassed" : "ValidationFailed";
+			}
+			fe.GoToVisualState(targetState);
+		}
 	}
+
+}
 
 
 	//public class HintedPasswordBoxedVisualStateManagerService : AbstractElementProxyService<PasswordBox>
@@ -134,4 +139,3 @@ namespace Material.Controls.Behaviors
 	//	}
 
 	//}
-}
