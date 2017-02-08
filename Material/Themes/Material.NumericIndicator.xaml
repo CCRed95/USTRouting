@@ -1,0 +1,120 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Material.Controls"
+                    xmlns:shadows="clr-namespace:Material.Controls.Shadows">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<Style TargetType="controls:NumericIndicator">
+    
+	<!--<Setter Property="Width" Value="140"/>
+    <Setter Property="Height" Value="70"/>-->
+	
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="controls:NumericIndicator">
+          <DockPanel>
+            <Label Content="{TemplateBinding Title}" Style="{StaticResource t15pSubhead}" Foreground="{StaticResource mtGrey800}" 
+									 FontWeight="Medium" DockPanel.Dock="Top" Padding="0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+              <Label Content="{TemplateBinding Value}" Style="{StaticResource t34pDisplay1}" Foreground="{StaticResource mtGrey800}" 
+										 FontWeight="Light" Padding="3"/>
+              <Label Content="{TemplateBinding Label}" Style="{StaticResource t13pBody1}" Foreground="{StaticResource mtGrey600}" Padding="3"/>
+            </StackPanel>
+          </DockPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+	<!--<Style TargetType="controls:NumericIndicator">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:NumericIndicator">
+					<Grid>
+						<Grid.Height>
+							<Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth"/>
+						</Grid.Height>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid RowSpan="2">
+							<Ellipse Fill="{StaticResource mtTealA200}"
+																shadows:Shadow.Level="1"/>
+						</Grid>
+						<Label Content="{TemplateBinding Title}" 
+													Style="{StaticResource t15pSubhead}"
+													Foreground="{StaticResource mtGrey800}" 
+													FontWeight="Medium" Padding="0"/>
+						<Grid Row="1">
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+								<Label Content="{TemplateBinding Value}" 
+															Style="{StaticResource t34pDisplay1}" 
+															Foreground="{StaticResource mtGrey800}" 
+															FontWeight="Light" Padding="3"/>
+								<Label Content="{TemplateBinding Label}"
+															Style="{StaticResource t13pBody1}" 
+															Foreground="{StaticResource mtGrey400}"
+															Padding="3"/>
+							</StackPanel>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>-->
+	<Style TargetType="controls:NumericIndicator" x:Key="BlueNumericIndicator" BasedOn="{StaticResource {x:Type controls:NumericIndicator}}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:NumericIndicator">
+					<DockPanel>
+						<Label Content="{TemplateBinding Title}" Style="{StaticResource t15pSubhead}" Foreground="{StaticResource mtBlue800}" 
+									 FontWeight="Medium" DockPanel.Dock="Top" Padding="0"/>
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="{TemplateBinding Value}" Style="{StaticResource t34pDisplay1}" Foreground="{StaticResource mtBlue800}" 
+										 FontWeight="Normal" Padding="3"/>
+							<Label Content="{TemplateBinding Label}" Style="{StaticResource _t10pSubCaption}" Foreground="{StaticResource mtBlue600}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style TargetType="controls:NumericIndicator" x:Key="GreenNumericIndicator" BasedOn="{StaticResource {x:Type controls:NumericIndicator}}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:NumericIndicator">
+					<DockPanel>
+						<Label Content="{TemplateBinding Title}" Style="{StaticResource t12pCaption}" Foreground="{StaticResource mtGreen800}" 
+									 FontWeight="Medium" DockPanel.Dock="Top" Padding="0" />
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="{TemplateBinding Value}" Style="{StaticResource t24pHeadline}" Foreground="{StaticResource mtGreen800}" 
+										 FontWeight="Normal" Padding="3"/>
+							<Label Content="{TemplateBinding Label}" Style="{StaticResource _t10pSubCaption}" Foreground="{StaticResource mtGreen600}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="controls:NumericIndicator" x:Key="RedNumericIndicator" BasedOn="{StaticResource {x:Type controls:NumericIndicator}}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:NumericIndicator">
+					<DockPanel>
+						<Label Content="{TemplateBinding Title}" Style="{StaticResource t12pCaption}" Foreground="{StaticResource mtRed800}" 
+									 FontWeight="Medium" DockPanel.Dock="Top" Padding="0" />
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+							<Label Content="{TemplateBinding Value}" Style="{StaticResource t24pHeadline}" Foreground="{StaticResource mtRed800}" 
+										 FontWeight="Normal" Padding="3"/>
+							<Label Content="{TemplateBinding Label}" Style="{StaticResource _t10pSubCaption}" Foreground="{StaticResource mtRed600}" Padding="3"/>
+						</StackPanel>
+					</DockPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

@@ -1,0 +1,1 @@
+﻿select CityID, CityName, LegacyLocationID, LegacyLocationMoniker from Cities order by CityName

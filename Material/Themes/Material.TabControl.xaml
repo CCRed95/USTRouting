@@ -1,0 +1,414 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Material.Markup.Converters"
+                    xmlns:converters1="clr-namespace:Material.Converters"
+                    xmlns:behaviors="clr-namespace:Material.Controls.Behaviors"
+                    xmlns:shadows="clr-namespace:Material.Controls.Shadows">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+		<ResourceDictionary Source="Material.Palette.xaml"/>
+		<ResourceDictionary Source="Material.DefinedBrushes.xaml"/>
+		<ResourceDictionary Source="Material.ExtendedPalette.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<!--<Style TargetType="TabItem" BasedOn="{StaticResource t15pSubhead}">
+  <Setter Property="Template">
+   <Setter.Value>
+    <ControlTemplate TargetType="TabItem">
+     <Grid Background="Transparent">
+      <VisualStateManager.VisualStateGroups>
+       <VisualStateGroup Name="CommonStates">
+        <VisualState Name="Normal">
+         <Storyboard>
+          <DoubleAnimation To="0" Duration="0:0:0.2" EasingFunction="{Ease InOut, Cubic}"
+																															Storyboard.TargetName="PART_mouseoverscale" 
+																															Storyboard.TargetProperty="ScaleY"/>
+         </Storyboard>
+        </VisualState>
+        <VisualState Name="MouseOver">
+         <Storyboard>
+          <DoubleAnimation To=".1" Duration="0:0:0.2" EasingFunction="{Ease InOut, Cubic}"
+																															Storyboard.TargetName="PART_mouseoverscale" 
+																															Storyboard.TargetProperty="ScaleY"/>
+         </Storyboard>
+        </VisualState>
+       </VisualStateGroup>
+       <VisualStateGroup Name="SelectionStates">
+        <VisualState Name="Selected">
+         <Storyboard>
+          <DoubleAnimation To="1" Duration="0:0:0.25" EasingFunction="{Ease InOut, Cubic}"
+																															Storyboard.TargetName="PART_selectedscale" 
+																															Storyboard.TargetProperty="ScaleY"/>
+         </Storyboard>
+        </VisualState>
+        <VisualState Name="Unselected">
+         <Storyboard>
+          <DoubleAnimation To="0" Duration="0:0:0.25" EasingFunction="{Ease InOut, Cubic}"
+																															Storyboard.TargetName="PART_selectedscale" 
+																															Storyboard.TargetProperty="ScaleY"/>
+         </Storyboard>
+        </VisualState>
+
+       </VisualStateGroup>														<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																															Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+																															Duration="0:0:0.15" 
+																															To="1" 
+																															EasingFunction="{Ease Out, Cubic}"/>
+
+														<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																															Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+																															Duration="0:0:0.15" 
+																															To="1" 
+																															EasingFunction="{Ease Out, Cubic}"/>
+      </VisualStateManager.VisualStateGroups>
+      <Canvas RenderTransformOrigin=".5,1" Margin="0 5 0 5">
+       <Canvas.RenderTransform>
+        <ScaleTransform x:Name="PART_selectedscale" ScaleX="1" ScaleY="0"/>
+       </Canvas.RenderTransform>
+       <Path x:Name="PART_selected" RenderTransformOrigin=".5,.5">
+        <Path.RenderTransform>
+         <ScaleTransform ScaleY="-1"/>
+        </Path.RenderTransform>
+        <Path.Fill>
+         <Binding ElementName="PART_accent" Path="Background"/>
+        </Path.Fill>
+        <Path.Data>
+         <MultiBinding Converter="{converters:TabArcGeometryConverter}">
+          <Binding Path="ActualWidth" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+          <Binding Path="ActualHeight" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+         </MultiBinding>
+        </Path.Data>
+       </Path>
+
+      </Canvas>
+      <Canvas RenderTransformOrigin=".5,1" Margin="0 5 0 5">
+       <Canvas.RenderTransform>
+        <ScaleTransform x:Name="PART_mouseoverscale" ScaleX="1" ScaleY="0"/>
+       </Canvas.RenderTransform>
+       <Path x:Name="PART_mouseover" RenderTransformOrigin=".5,.5">
+        <Path.RenderTransform>
+         <ScaleTransform ScaleY="-1"/>
+        </Path.RenderTransform>
+        <Path.Fill>
+         <Binding ElementName="PART_accent" Path="Background"/>
+        </Path.Fill>
+        <Path.Data>
+         <MultiBinding Converter="{converters:TabArcGeometryConverter}">
+          <Binding Path="ActualWidth" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+          <Binding Path="ActualHeight" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+         </MultiBinding>
+        </Path.Data>
+       </Path>
+      </Canvas>
+      <Border x:Name="PART_accent" VerticalAlignment="Bottom" Height="5" RenderTransformOrigin=".5,1">
+       <Border.RenderTransform>
+        <ScaleTransform x:Name="PART_accentscale" ScaleX="1" ScaleY="1"/>
+       </Border.RenderTransform>
+       <Border.Width>
+        <MultiBinding	Converter="{converters1:CommonTabWidthConverter}">
+         <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=TabControl}"/>
+         <Binding Path="ActualWidth" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:Card}"/>
+        </MultiBinding>
+       </Border.Width>
+       <Border.Background>
+        <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=TabControl}" Converter="{converters1:MaterialProviderToTabAccent}"/>
+       </Border.Background>
+      </Border>
+      <ContentPresenter x:Name="ContentSite" ContentSource="Header" Margin="12" HorizontalAlignment="Center"/>
+     </Grid>
+    </ControlTemplate>
+   </Setter.Value>
+  </Setter>
+ </Style>
+ <Style TargetType="TabControl">
+  <Setter Property="Padding" Value="0"/>
+  <Setter Property="Template">
+   <Setter.Value>
+    <ControlTemplate TargetType="TabControl">
+     <Grid KeyboardNavigation.TabNavigation="Local">
+      <Grid.RowDefinitions>
+       <RowDefinition Height="Auto"/>
+       <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <controls:Card Background="{StaticResource _mtGrey950}" >
+       <DockPanel IsItemsHost="True"/>
+      </controls:Card>
+      <Border
+										KeyboardNavigation.TabNavigation="Local"
+										KeyboardNavigation.DirectionalNavigation="Contained"
+										KeyboardNavigation.TabIndex="2"
+								Grid.Row="1">
+       <ContentPresenter 
+										SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+										Margin="{TemplateBinding Padding}"
+										ContentSource="SelectedContent"/>
+      </Border>
+
+     </Grid>
+    </ControlTemplate>
+   </Setter.Value>
+  </Setter>
+ </Style>-->
+	<Style TargetType="TabItem">
+		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}, Path=Foreground}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabItem">
+					<Grid Background="Transparent">
+						<Canvas RenderTransformOrigin=".5,1">
+							<Path RenderTransformOrigin=".5,.5">
+								<Path.Fill>
+									<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=TabControl}" Converter="{converters1:MaterialProviderToTabAccent}"/>
+								</Path.Fill>
+								<Path.Data>
+									<MultiBinding Converter="{converters:TabArcGeometryConverter}">
+										<Binding Path="ActualWidth" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+										<Binding Path="ActualHeight" RelativeSource="{RelativeSource FindAncestor, AncestorType=Canvas}"/>
+										<Binding Path="(behaviors:TabControlAssist.TabIndex)" RelativeSource="{RelativeSource FindAncestor, AncestorType=TabItem}"/>
+									</MultiBinding>
+								</Path.Data>
+							</Path>
+						</Canvas>
+						<ContentPresenter x:Name="ContentSite" 
+																								ContentSource="Header" 
+																								Margin="0 10" 
+																								HorizontalAlignment="Center"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="TabControl" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="behaviors:TabControlAssist.IndexTabPosition" Value="True"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabControl">
+					<Grid KeyboardNavigation.TabNavigation="Local">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<UniformGrid x:Name="PART_TabHost" 
+																			IsItemsHost="True" 
+																			Rows="1"/>
+						<Border KeyboardNavigation.TabNavigation="Local" 
+														KeyboardNavigation.DirectionalNavigation="Contained"
+														KeyboardNavigation.TabIndex="2"
+														Grid.Row="1">
+							<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+																									Margin="{TemplateBinding Padding}"
+																									ContentSource="SelectedContent"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="TabItem" x:Key="SelectorTabItem">
+		<Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}, Path=Foreground}"/>
+		<Setter Property="Background" Value="{StaticResource mtGrey300}"/>
+		<Setter Property="Margin" Value="5 5"/>
+		<Setter Property="Padding" Value="5 15 25 15"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabItem">
+					<Grid Background="Transparent">
+						<Border x:Name="PART_Root"
+														RenderTransformOrigin=".5,.5">
+							<Border.RenderTransform>
+								<ScaleTransform ScaleX="1" ScaleY="1"/>
+							</Border.RenderTransform>
+							<Border x:Name="PART_Container" 
+															shadows:Shadow.Level="2"
+															shadows:Shadow.ForceAllowShadow="True"
+															Background="{StaticResource _mtBlueGrey825}"
+															RenderTransformOrigin=".5,.5">
+								<Border.RenderTransform>
+									<ScaleTransform ScaleX="1" ScaleY="1"/>
+								</Border.RenderTransform>
+								<Border.CornerRadius>
+									<MultiBinding Converter="{FitCornerRadiusConverter2}">
+										<Binding ElementName="PART_Container" Path="ActualHeight"/>
+										<Binding ElementName="PART_Container" Path="ActualWidth"/>
+									</MultiBinding>
+								</Border.CornerRadius>
+								<Grid x:Name="PART_Content" 
+														Margin="{TemplateBinding Padding}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<Grid Column="0">
+										<Grid.Width>
+											<Binding ElementName="PART_Content" Path="ActualHeight"/>
+										</Grid.Width>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition />
+											<ColumnDefinition Width="2*"/>
+											<ColumnDefinition />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition />
+											<RowDefinition Height="2*"/>
+											<RowDefinition />
+										</Grid.RowDefinitions>
+										<Ellipse Grid.Row="1"
+																			Grid.Column="1"
+																			shadows:Shadow.Level="2"
+																			shadows:Shadow.ForceAllowShadow="True"
+																			Fill="{TemplateBinding Background}"/>
+									</Grid>
+									<ContentPresenter x:Name="ContentSite" 
+																											Grid.Column="1"
+																											ContentSource="Header"/>
+								</Grid>
+							</Border>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger SourceName="PART_Container" Property="IsMouseOver" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_Root" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+																											Duration="0:0:0.1" 
+																											To="1" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Root" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+																											Duration="0:0:0.1" 
+																											To="1" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container"
+																											Storyboard.TargetProperty="(shadows:Shadow.Level)"
+																											Duration="0:0:0.1" 
+																											To="3" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<ColorAnimation Storyboard.TargetName="PART_Container"
+																										Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+																										Duration="0:0:0.1"
+																										To="{StaticResource _cBlueGrey800}"
+																										EasingFunction="{Ease Out, Cubic}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_Root" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+																											Duration="0:0:0.1" 
+																											To=".95" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Root" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+																											Duration="0:0:0.1" 
+																											To=".95" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container"
+																											Storyboard.TargetProperty="(shadows:Shadow.Level)"
+																											Duration="0:0:0.1" 
+																											To="2" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<ColorAnimation Storyboard.TargetName="PART_Container"
+																										Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+																										Duration="0:0:0.1"
+																										To="{StaticResource _cBlueGrey825}"
+																										EasingFunction="{Ease Out, Cubic}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<Trigger Property="IsSelected" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+																											Duration="0:0:0.15" 
+																											To="1" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+																											Duration="0:0:0.15" 
+																											To="1" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container"
+																											Storyboard.TargetProperty="(shadows:Shadow.Level)"
+																											Duration="0:0:0.1" 
+																											To="4" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+																											Duration="0:0:0.15" 
+																											To=".9" 
+																											EasingFunction="{Ease In, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container" 
+																											Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+																											Duration="0:0:0.15" 
+																											To=".9" 
+																											EasingFunction="{Ease In, Cubic}"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_Container"
+																											Storyboard.TargetProperty="(shadows:Shadow.Level)"
+																											Duration="0:0:0.1" 
+																											To="2" 
+																											EasingFunction="{Ease Out, Cubic}"/>
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="TabControl" x:Key="SelectorTabControl" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabControl">
+					<Grid KeyboardNavigation.TabNavigation="Local">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<StackPanel x:Name="PART_TabHost" 
+																		Margin="40 0"
+																		IsItemsHost="True" 
+																		Orientation="Horizontal"
+																		HorizontalAlignment="Left"/>
+						<Border KeyboardNavigation.TabNavigation="Local" 
+														KeyboardNavigation.DirectionalNavigation="Contained"
+														KeyboardNavigation.TabIndex="2"
+														Grid.Row="1">
+							<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+																									Margin="{TemplateBinding Padding}"
+																									ContentSource="SelectedContent"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

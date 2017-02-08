@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<SolidColorBrush x:Key="_Grey005" Color="{Grey 005}"/>
+	<SolidColorBrush x:Key="_Grey010" Color="{Grey 010}"/>
+	<SolidColorBrush x:Key="_Grey015" Color="{Grey 015}"/>
+	<SolidColorBrush x:Key="_Grey020" Color="{Grey 020}"/>
+	<SolidColorBrush x:Key="_Grey025" Color="{Grey 025}"/>
+	<SolidColorBrush x:Key="_Grey030" Color="{Grey 030}"/>
+	<SolidColorBrush x:Key="_Grey035" Color="{Grey 035}"/>
+
+	<SolidColorBrush x:Key="_Grey040" Color="{Grey 040}"/>
+	<SolidColorBrush x:Key="_Grey045" Color="{Grey 045}"/>
+	<SolidColorBrush x:Key="_Grey050" Color="{Grey 050}"/>
+	<SolidColorBrush x:Key="_Grey055" Color="{Grey 055}"/>
+	<SolidColorBrush x:Key="_Grey060" Color="{Grey 060}"/>
+	<SolidColorBrush x:Key="_Grey065" Color="{Grey 065}"/>
+
+	<SolidColorBrush x:Key="_Grey070" Color="{Grey 070}"/>
+	<SolidColorBrush x:Key="_Grey075" Color="{Grey 075}"/>
+	<SolidColorBrush x:Key="_Grey080" Color="{Grey 080}"/>
+	<SolidColorBrush x:Key="_Grey085" Color="{Grey 085}"/>
+	<SolidColorBrush x:Key="_Grey090" Color="{Grey 090}"/>
+	<SolidColorBrush x:Key="_Grey095" Color="{Grey 095}"/>
+
+	<SolidColorBrush x:Key="_Grey100" Color="{Grey 100}"/>
+	<SolidColorBrush x:Key="_Grey105" Color="{Grey 105}"/>
+	<SolidColorBrush x:Key="_Grey110" Color="{Grey 110}"/>
+	<SolidColorBrush x:Key="_Grey115" Color="{Grey 115}"/>
+	<SolidColorBrush x:Key="_Grey120" Color="{Grey 120}"/>
+	<SolidColorBrush x:Key="_Grey125" Color="{Grey 125}"/>
+
+	<SolidColorBrush x:Key="_Grey130" Color="{Grey 130}"/>
+	<SolidColorBrush x:Key="_Grey135" Color="{Grey 135}"/>
+	<SolidColorBrush x:Key="_Grey140" Color="{Grey 140}"/>
+	<SolidColorBrush x:Key="_Grey145" Color="{Grey 145}"/>
+	<SolidColorBrush x:Key="_Grey150" Color="{Grey 150}"/>
+	<SolidColorBrush x:Key="_Grey155" Color="{Grey 155}"/>
+
+	<SolidColorBrush x:Key="_Grey160" Color="{Grey 160}"/>
+	<SolidColorBrush x:Key="_Grey165" Color="{Grey 165}"/>
+	<SolidColorBrush x:Key="_Grey170" Color="{Grey 170}"/>
+	<SolidColorBrush x:Key="_Grey175" Color="{Grey 175}"/>
+	<SolidColorBrush x:Key="_Grey180" Color="{Grey 180}"/>
+	<SolidColorBrush x:Key="_Grey185" Color="{Grey 185}"/>
+
+	<SolidColorBrush x:Key="_Grey190" Color="{Grey 190}"/>
+	<SolidColorBrush x:Key="_Grey195" Color="{Grey 195}"/>
+	<SolidColorBrush x:Key="_Grey200" Color="{Grey 200}"/>
+	<SolidColorBrush x:Key="_Grey205" Color="{Grey 205}"/>
+	<SolidColorBrush x:Key="_Grey210" Color="{Grey 210}"/>
+	<SolidColorBrush x:Key="_Grey215" Color="{Grey 215}"/>
+
+	<SolidColorBrush x:Key="_Grey220" Color="{Grey 220}"/>
+	<SolidColorBrush x:Key="_Grey225" Color="{Grey 225}"/>
+	<SolidColorBrush x:Key="_Grey230" Color="{Grey 230}"/>
+	<SolidColorBrush x:Key="_Grey235" Color="{Grey 235}"/>
+	<SolidColorBrush x:Key="_Grey240" Color="{Grey 240}"/>
+	<SolidColorBrush x:Key="_Grey245" Color="{Grey 245}"/>
+
+	<SolidColorBrush x:Key="_Grey250" Color="{Grey 250}"/>
+	<SolidColorBrush x:Key="_Grey255" Color="{Grey 255}"/>
+
+	<SolidColorBrush x:Key="_BlueGrey0" Color="#5a6173"/>
+	<SolidColorBrush x:Key="_BlueGrey1" Color="#52596b"/>
+	<SolidColorBrush x:Key="_BlueGrey2" Color="#414755"/>
+	<SolidColorBrush x:Key="_BlueGrey3" Color="#2f3140"/>
+
+	<SolidColorBrush x:Key="_mtBlueGrey825" Color="#313F46"/>
+	<SolidColorBrush x:Key="_mtBlueGrey850" Color="#2B373D"/>
+	<SolidColorBrush x:Key="_mtBlueGrey875" Color="#252F34"/>
+
+	<Color x:Key="_cBlueGrey800">#37474F</Color>
+	<Color x:Key="_cBlueGrey825">#313F46</Color>
+	<Color x:Key="_cBlueGrey850">#2B373D</Color>
+	<Color x:Key="_cBlueGrey875">#252F34</Color>
+	<Color x:Key="_cBlueGrey900">#263238</Color>
+
+</ResourceDictionary>

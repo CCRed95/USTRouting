@@ -1,0 +1,968 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Material.Controls"
+                    xmlns:text="clr-namespace:Material.Design.Text"
+                    xmlns:converters="clr-namespace:Material.Converters"
+                    xmlns:primitives="clr-namespace:Material.Controls.Primitives"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ripples="clr-namespace:Material.Controls.Ripples"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:shadows="clr-namespace:Material.Controls.Shadows">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Material.Drawables.xaml"/>
+		<ResourceDictionary Source="Material.Button.xaml"/>
+		<ResourceDictionary Source="Material.Button.Flat.xaml"/>
+		<ResourceDictionary Source="Material.Button.PathButton.xaml"/>
+		<ResourceDictionary Source="Material.Shadows.xaml"/>
+		<ResourceDictionary Source="Material.Fonts.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="DayOfWeekCalendarHeaderText" TargetType="Label">
+		<!--<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontWeight" Value="Normal"/>-->
+		<Setter Property="text:TextualStyle.BindStyle">
+			<Setter.Value>
+				<Binding Path="HeaderDayOfWeekTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+	<Style x:Key="CalendarDayTextOtherMonth" TargetType="Label" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="Opacity" Value=".5"/>
+	</Style>
+
+	<Style x:Key="CalendarDayTextOtherMonthFuture" TargetType="Label" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="Opacity" Value=".3"/>
+	</Style>
+
+	<Style x:Key="CalendarDayTextValidDate" TargetType="Label" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="Opacity" Value="1"/>
+	</Style>
+
+	<Style x:Key="CalendarDayTextFutureDate" TargetType="Label" BasedOn="{StaticResource t13pBody1}">
+		<Setter Property="Foreground" Value="Black"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+		<Setter Property="Opacity" Value=".6"/>
+	</Style>
+
+	<Style x:Key="CalendarButton" TargetType="ToggleButton">
+		<Setter Property="Foreground" Value="{StaticResource mtGrey900}"/>
+		<Setter Property="ClipToBounds" Value="True"/>
+		<Setter Property="Background">
+			<Setter.Value>
+				<Binding Path="FallbackMaterialSet.P500" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}" />
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		<Setter Property="Height">
+			<Setter.Value>
+				<Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="primitives:VisualFeedback.Brush" Value="{StaticResource LightSurfaceVisualFeedbackBrush}"/>
+		<!--<Setter Property="materialControls:VisualFeedback.Brush" Value="{StaticResource mtAmberA400}"/>-->
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid x:Name="PART_Root" ClipToBounds="False">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CheckStates">
+								<VisualState x:Name="Checked">
+									<Storyboard>
+										<!--<DoubleAnimation Storyboard.TargetName="PART_UncheckedIcon" 
+																											Storyboard.TargetProperty="Opacity" 
+																											To="0" Duration="0:0:.15"/>-->
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Opacity" 
+																											To="1" Duration="0:0:.15"/>
+
+										<!--<ColorAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																										Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" 
+																										To="{Binding Source={StaticResource mtRedA700}, Path=Color}" Duration="0:0:.15"/>-->
+
+										<!--<ColorAnimation Storyboard.TargetName="PART_content" 
+																										Storyboard.TargetProperty="Content.(Control.Foreground).(SolidColorBrush.Color)" 
+																										To="{Binding Source={StaticResource mtGrey900}, Path=Color}" Duration="0:0:.15"/>-->
+
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Unchecked">
+									<Storyboard>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Opacity" 
+																											To="0" Duration="0:0:.15"/>
+
+										<!--<DoubleAnimation Storyboard.TargetName="PART_CheckedIcon" 
+																											Storyboard.TargetProperty="Opacity" 
+																											To="0" Duration="0:0:.15"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_UncheckedIcon" 
+																											Storyboard.TargetProperty="Opacity" 
+																											To="1" Duration="0:0:.15"/>-->
+
+										<!--<ColorAnimation Storyboard.TargetName="PART_content" 
+																										Storyboard.TargetProperty="Content.(Control.Foreground).(SolidColorBrush.Color)" 
+																										To="{Binding Source={StaticResource mtGrey100}, Path=Color}" Duration="0:0:.15"/>-->
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<ripples:RippleBinder.Tracker>
+							<ripples:NewRippleTracker EventName="MouseDown" />
+						</ripples:RippleBinder.Tracker>
+						<Ellipse x:Name="PART_ButtonEllipse">
+							<Ellipse.Fill>
+								<SolidColorBrush>
+									<SolidColorBrush.Color>
+										<Binding Path="Background.(SolidColorBrush.Color)" RelativeSource="{RelativeSource TemplatedParent}" />
+									</SolidColorBrush.Color>
+								</SolidColorBrush>
+								<!--<TemplateBinding Property="Background" />-->
+							</Ellipse.Fill>
+							<Ellipse.Effect>
+								<DropShadowEffect BlurRadius="8" ShadowDepth="1.5" Direction="270" 
+																									 Color="Black" Opacity=".42"/>
+							</Ellipse.Effect>
+						</Ellipse>
+						<Ellipse IsHitTestVisible="False" x:Name="PART_HoverEllipse">
+							<Ellipse.Fill>
+								<SolidColorBrush Opacity="0" Color="White"/>
+							</Ellipse.Fill>
+						</Ellipse>
+						<Canvas x:Name="PART_RippleContainer" IsHitTestVisible="False">
+							<Canvas.RenderTransform>
+								<TranslateTransform>
+									<ripples:RippleFinal.Placement>
+										<MultiBinding Converter="{ripples:DynamicRipplePlacementConverter}">
+											<Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}"/>
+											<Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
+											<Binding Path="ActualHeight" ElementName="PART_Ripple"/>
+											<Binding Path="(ripples:RippleFinal.MousePosition)" RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}"/>
+										</MultiBinding>
+									</ripples:RippleFinal.Placement>
+								</TranslateTransform>
+							</Canvas.RenderTransform>
+							<Ellipse x:Name="PART_Ripple" RenderTransformOrigin=".5,.5" 
+																	VerticalAlignment="Center" HorizontalAlignment="Center"
+																	IsHitTestVisible="False">
+								<Ellipse.RenderTransform>
+									<ScaleTransform ScaleX="0" ScaleY="0"/>
+								</Ellipse.RenderTransform>
+								<Ellipse.Fill>
+									<Binding RelativeSource="{RelativeSource TemplatedParent}" Path="(primitives:VisualFeedback.Brush)"/>
+								</Ellipse.Fill>
+								<Ellipse.Height>
+									<MultiBinding Converter="{ripples:DynamicRippleDiameterConverter}" ConverterParameter="1.5">
+										<Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}"/>
+										<Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
+										<Binding Path="(ripples:RippleFinal.MousePosition)" RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}"/>
+									</MultiBinding>
+								</Ellipse.Height>
+								<Ellipse.Width>
+									<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight" />
+								</Ellipse.Width>
+							</Ellipse>
+						</Canvas>
+						<ContentControl x:Name="PART_content" 
+																							HorizontalAlignment="Center" 
+																							VerticalAlignment="Center" 
+																							Margin="{TemplateBinding Padding}" 
+																							Content="{Binding}"
+																						ClipToBounds="False">
+							<ContentControl.ContentTemplate>
+								<DataTemplate DataType="controls:CalendarDayData">
+									<Grid>
+										<Label x:Name="PART_DayNumberText" 
+																	Content="{Binding DayNumber}"
+																				text:TextualStyle.BindingRelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}">
+											<!--<text:TextualStyle.BindStyle>
+											<Binding Path="CalendarValidSelectableDayTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+										</text:TextualStyle.BindStyle>-->
+										</Label>
+										<Label x:Name="PART_DayNumberTextSelected" 
+																	Opacity="0"
+																	Content="{Binding DayNumber}"
+																	text:TextualStyle.BindingRelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}">
+											<text:TextualStyle.BindStyle>
+												<Binding Path="CalendarSelectedDayTextualStyle" 
+																				RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+									</Grid>
+									<DataTemplate.Triggers>
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding IsWithinActiveMonth}" Value="False"/>
+												<Condition Binding="{Binding IsFuture}" Value="False"/>
+											</MultiDataTrigger.Conditions>
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarValidSelectableDayOutsideMonthTextualStyle" 
+																						RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+										</MultiDataTrigger>
+
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding IsWithinActiveMonth}" Value="True"/>
+												<Condition Binding="{Binding IsFuture}" Value="False"/>
+											</MultiDataTrigger.Conditions>
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarValidSelectableDayTextualStyle" 
+																						RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+										</MultiDataTrigger>
+
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding IsWithinActiveMonth}" Value="True"/>
+												<Condition Binding="{Binding IsFuture}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarInvalidFutureDayWithinMonthTextualStyle" 
+																						RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+										</MultiDataTrigger>
+
+
+										<MultiDataTrigger>
+											<MultiDataTrigger.Conditions>
+												<Condition Binding="{Binding IsWithinActiveMonth}" Value="False"/>
+												<Condition Binding="{Binding IsFuture}" Value="True"/>
+											</MultiDataTrigger.Conditions>
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarValidSelectableDayOutsideMonthTextualStyle" 
+																						RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+										</MultiDataTrigger>
+
+
+										<DataTrigger Value="True">
+											<DataTrigger.Binding>
+												<Binding Path="IsChecked" RelativeSource="{RelativeSource FindAncestor, AncestorType=ToggleButton}" />
+											</DataTrigger.Binding>
+											<Setter TargetName="PART_DayNumberText" Property="Opacity" Value="0"/>
+											<Setter TargetName="PART_DayNumberTextSelected" Property="Opacity" Value="1"/>
+										</DataTrigger>
+
+										<!--
+										<DataTrigger Binding="{Binding IsWithinActiveMonth}" Value="False">
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarValidSelectableDayTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+											-->
+										<!--<Setter TargetName="PART_DayNumberText" Property="FontWeight" Value="Light"/>-->
+										<!--
+
+										</DataTrigger>
+
+										<DataTrigger Binding="{Binding IsFuture}" Value="True">
+											<Setter TargetName="PART_DayNumberText" Property="text:TextualStyle.BindStyle">
+												<Setter.Value>
+													<Binding Path="CalendarValidSelectableDayTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</Setter.Value>
+											</Setter>
+											-->
+										<!--<Setter TargetName="PART_DayNumberText" Property="FontWeight" Value="Thin"/>
+
+											<Setter TargetName="PART_DayNumberText" Property="Opacity" Value=".7"/>-->
+										<!--
+
+										</DataTrigger>-->
+									</DataTemplate.Triggers>
+								</DataTemplate>
+							</ContentControl.ContentTemplate>
+						</ContentControl>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<!--<Trigger Property="IsMouseOver" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)" 
+																											To="25" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)" 
+																											To="8" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_HoverEllipse" 
+																											Storyboard.TargetProperty="Fill.(SolidColorBrush.Opacity)" 
+																											To=".2" Duration="0:0:.1" />
+
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)" 
+																											To="8" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)" 
+																											To="1.5" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_HoverEllipse" 
+																											Storyboard.TargetProperty="Fill.(SolidColorBrush.Opacity)" 
+																											To=".0" Duration="0:0:.1" />
+
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)" 
+																											To="4" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)" 
+																											To=".5" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_HoverEllipse" 
+																											Storyboard.TargetProperty="Fill.(SolidColorBrush.Opacity)" 
+																											To="0" Duration="0:0:.1" />
+
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard>
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.BlurRadius)" 
+																											To="8" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ButtonEllipse" 
+																											Storyboard.TargetProperty="Effect.(DropShadowEffect.ShadowDepth)" 
+																											To="1.5" Duration="0:0:0.2"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_HoverEllipse" 
+																											Storyboard.TargetProperty="Fill.(SolidColorBrush.Opacity)" 
+																											To="0" Duration="0:0:.1" />
+
+									</Storyboard>
+								</BeginStoryboard>
+							</Trigger.ExitActions>
+						</Trigger>-->
+						<!--<Trigger Property="IsChecked" Value="True">
+							<Setter Property=""></Setter>
+						</Trigger>-->
+						<EventTrigger RoutedEvent="Click">
+							<BeginStoryboard>
+								<Storyboard SpeedRatio="1">
+									<DoubleAnimation Storyboard.TargetName="PART_Ripple" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" 
+																											From="0" To="1" Duration="0:0:0.6" EasingFunction="{Ease Out, Quad}"/>
+
+									<DoubleAnimation Storyboard.TargetName="PART_Ripple" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" 
+																											From="0" To="1" Duration="0:0:0.6" EasingFunction="{Ease Out, Quad}"/>
+
+									<DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Ripple" Storyboard.TargetProperty="Opacity">
+										<SplineDoubleKeyFrame Value="1" KeyTime="0:0:0.00"/>
+										<SplineDoubleKeyFrame Value="1" KeyTime="0:0:0.05"/>
+										<SplineDoubleKeyFrame Value="1" KeyTime="0:0:0.60"/>
+										<SplineDoubleKeyFrame Value="0" KeyTime="0:0:0.75"/>
+									</DoubleAnimationUsingKeyFrames>
+
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="controls:DateRangePicker" BasedOn="{StaticResource t14pButton}">
+		<Setter Property="Background" Value="{StaticResource mtGrey100}"/>
+		<Setter Property="MinWidth" Value="300"/>
+		<Setter Property="MinHeight" Value="500"/>
+		<Setter Property="CalendarValidSelectableDayTextualStyle" Value="110% m ->Teal400"/>
+		<Setter Property="CalendarInvalidFutureDayWithinMonthTextualStyle" Value="80% l ->Black000,.5"/>
+		<Setter Property="CalendarValidSelectableDayOutsideMonthTextualStyle" Value="100% l ->Black000,.5"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:DateRangePicker">
+					<Border Background="{TemplateBinding Background}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup Name="CalendarViewStates">
+								<VisualState Name="MonthSelectViewState">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_DayView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="0"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_DayView"
+																											Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(TranslateTransform.Y)"
+																											From="0"
+																											To="75"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_MonthView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="1"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_MonthView"
+																											Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(TranslateTransform.Y)"
+																											From="-75"
+																											To="0"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_DayView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="False"/>
+										</BooleanAnimationUsingKeyFrames>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_MonthView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="True"/>
+										</BooleanAnimationUsingKeyFrames>
+
+
+
+										<DoubleAnimation Storyboard.TargetName="PART_ActiveMonthAndYearDisplay"
+																											Storyboard.TargetProperty="Opacity"
+																											To="0"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_BackToDaySelectView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="1"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_ActiveMonthAndYearDisplay"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="False"/>
+										</BooleanAnimationUsingKeyFrames>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_BackToDaySelectView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="True"/>
+										</BooleanAnimationUsingKeyFrames>
+
+
+									</Storyboard>
+								</VisualState>
+								<VisualState Name="DateSelectViewState">
+									<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="PART_MonthView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="0"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_MonthView"
+																											Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(TranslateTransform.Y)"
+																											From="0"
+																											To="75"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_DayView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="1"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_DayView"
+																											Storyboard.TargetProperty="RenderTransform.(TransformGroup.Children)[0].(TranslateTransform.Y)"
+																											From="-75"
+																											To="0"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_MonthView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="False"/>
+										</BooleanAnimationUsingKeyFrames>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_DayView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="True"/>
+										</BooleanAnimationUsingKeyFrames>
+
+
+
+										<DoubleAnimation Storyboard.TargetName="PART_BackToDaySelectView"
+																											Storyboard.TargetProperty="Opacity"
+																											To="0"
+																											EasingFunction="{Ease In, Quad}"
+																											BeginTime="0:0:0.0"
+																											Duration="0:0:0.3"/>
+
+										<DoubleAnimation Storyboard.TargetName="PART_ActiveMonthAndYearDisplay"
+																											Storyboard.TargetProperty="Opacity"
+																											To="1"
+																											EasingFunction="{Ease Out, Quad}"
+																											BeginTime="0:0:0.2"
+																											Duration="0:0:0.3"/>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_BackToDaySelectView"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="False"/>
+										</BooleanAnimationUsingKeyFrames>
+
+										<BooleanAnimationUsingKeyFrames Storyboard.TargetName="PART_ActiveMonthAndYearDisplay"
+																																										Storyboard.TargetProperty="IsHitTestVisible">
+											<DiscreteBooleanKeyFrame KeyTime="0:0:0.5" Value="True"/>
+										</BooleanAnimationUsingKeyFrames>
+
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid x:Name="PART_Root" ClipToBounds="{TemplateBinding ClipToBounds}">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition />
+							</Grid.RowDefinitions>
+							<Grid Background="{StaticResource mtTeal500}"
+													Panel.ZIndex="500"
+													shadows:Shadow.Level="2"
+													shadows:Shadow.ForceAllowShadow="True">
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<Grid Margin="30 40 30 30">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition />
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<StackPanel x:Name="PART_LeftActiveDateDisplay" 
+																					Margin="30 0"
+																					Opacity="1">
+										<Label Padding="0">
+											<Label.Content>
+												<Binding Path="StartDate" RelativeSource="{RelativeSource TemplatedParent}"
+																				 Converter="{controls:DateTimeFormatter}"	ConverterParameter="dddd"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderDayOfWeekTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+										<Label Padding="0">
+											<Label.Content>
+												<Binding Path="StartDate" RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{controls:DateTimeFormatter}"	ConverterParameter="MMM dd"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderMonthDayTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+										<Label>
+											<Label.Content>
+												<Binding Path="StartDate" RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{controls:DateTimeFormatter}"	ConverterParameter="yyyy"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderYearTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+									</StackPanel>
+									<Label Style="{StaticResource t24pHeadline}"
+																FontSize="42pt"
+																Content="-"
+																FontWeight="Thin"
+																Grid.Column="1"/>
+									<StackPanel x:Name="PART_RightActiveDateDisplay" 
+																					Grid.Column="2"
+																					Margin="30 0"
+																					Opacity="1">
+										<Label Padding="0">
+											<Label.Content>
+												<Binding Path="EndDate" RelativeSource="{RelativeSource TemplatedParent}"
+																				 Converter="{controls:DateTimeFormatter}"	ConverterParameter="dddd"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderDayOfWeekTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+										<Label Padding="0">
+											<Label.Content>
+												<Binding Path="EndDate" RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{controls:DateTimeFormatter}"	ConverterParameter="MMM dd"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderMonthDayTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+										<Label>
+											<Label.Content>
+												<Binding Path="EndDate" RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{controls:DateTimeFormatter}"	ConverterParameter="yyyy"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="HeaderYearTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+									</StackPanel>
+								</Grid>
+								<Label Grid.Row="1"
+															Content="Duration: 7 Days"
+															Opacity=".5"
+															Padding="15 0 15 15">
+									<text:TextualStyle.BindStyle>
+										<Binding Path="HeaderSelectedDurationTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+									</text:TextualStyle.BindStyle>
+								</Label>
+							</Grid>
+							<Grid Row="1">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition />
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition />
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<Button x:Name="PART_PreviousMonthButton"
+																	Style="{StaticResource PathButton}">
+										<Path Fill="{StaticResource mtTeal500}" Style="{StaticResource drawablechevron_left}"/>
+									</Button>
+									<StackPanel x:Name="PART_ActiveMonthAndYearDisplay"
+																					Grid.Column="1"
+																					HorizontalAlignment="Center"
+																					Orientation="Horizontal">
+										<Label x:Name="PART_MonthLabel"
+																	Padding="10">
+											<Label.Content>
+												<Binding Path="ActiveMonthNumber" RelativeSource="{RelativeSource TemplatedParent}"
+																					Converter="{controls:MonthNumberToMonthNameConverter}"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="CalendarTitleTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+										<Label x:Name="PART_YearLabel"
+										       Padding="10">
+											<Label.Content>
+												<Binding Path="ActiveYearNumber" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</Label.Content>
+											<text:TextualStyle.BindStyle>
+												<Binding Path="CalendarTitleTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+											</text:TextualStyle.BindStyle>
+										</Label>
+									</StackPanel>
+
+									<Label x:Name="PART_BackToDaySelectView"
+																Content="Back"
+																Padding="10"
+																Opacity="0"
+																IsHitTestVisible="False"
+																Grid.Column="1">
+										<text:TextualStyle.BindStyle>
+											<Binding Path="CalendarTitleTextualStyle" RelativeSource="{RelativeSource TemplatedParent}"/>
+										</text:TextualStyle.BindStyle>
+									</Label>
+									<Button x:Name="PART_NextMonthButton"
+																	Grid.Column="2" 
+																	Style="{StaticResource PathButton}">
+										<Path Fill="{StaticResource mtTeal500}" Style="{StaticResource drawablechevron_right}"/>
+									</Button>
+								</Grid>
+
+								<Grid Row="1">
+									<StackPanel x:Name="PART_DayView" Margin="25 10">
+										<StackPanel.RenderTransform>
+											<TransformGroup>
+												<TranslateTransform/>
+												<ScaleTransform />
+											</TransformGroup>
+										</StackPanel.RenderTransform>
+										<ItemsControl>
+											<!--<ItemsControl.Height>
+											<Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth"
+																				Converter="{converters:CalendarRowHeightConverter}" ConverterParameter="1"/>
+										</ItemsControl.Height>-->
+											<ItemsControl.Items>
+												<system:String>S</system:String>
+												<system:String>M</system:String>
+												<system:String>T</system:String>
+												<system:String>W</system:String>
+												<system:String>T</system:String>
+												<system:String>F</system:String>
+												<system:String>S</system:String>
+											</ItemsControl.Items>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate DataType="system:String">
+													<Label Content="{Binding}"
+																			text:TextualStyle.BindingRelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}">
+														<text:TextualStyle.BindStyle>
+															<Binding Path="CalendarDayOfWeekHeaderTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+														</text:TextualStyle.BindStyle>
+													</Label>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<UniformGrid Rows="1"/>
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+										</ItemsControl>
+										<Grid>
+											<Canvas x:Name="PART_HighlightGrid"/>
+											<ItemsControl>
+												<React.Storyboards>
+													<ReactiveStoryboard>
+														<ReactiveStoryboard.DynamicTriggers>
+															<ReactiveEventTrigger EventName="AnimateOutTrigger">
+																<ReactiveEventTrigger.SourceObject>
+																	<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+																</ReactiveEventTrigger.SourceObject>
+															</ReactiveEventTrigger>
+														</ReactiveStoryboard.DynamicTriggers>
+														<!--<ReactiveSetter TargetName="PART_DayView"
+																														Property="Control.Opacity"
+																														Value=".4">
+															<ReactiveSetter.TargetObject>
+																<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+															</ReactiveSetter.TargetObject>
+														</ReactiveSetter>-->
+														<IterativeReaction>
+															<IterativeReaction.AnimationTemplate>
+																<AnimationTemplate SelectorExpression="$FindNameInItemsControl(PART_CalendarButton)">
+																	<AnimationTemplate.Emitters>
+																		<DoubleAnimationEmitter Property="UIElement.Opacity"
+																																										Duration="0:0:0.3"
+																																										From="0"
+																																										To="1"
+																																										EasingFunction="{Ease Out, Cubic, .4}" 
+																																										ApplyFromBeforeOffset="True">
+																			<DoubleAnimationEmitter.IterativeOffset>
+																				<IterativeOffset Offset="0:0:1.5" IterativeOffsetMode="EntireDuration"	MaximumEffectiveOffset="0:0:0.1"/>
+																			</DoubleAnimationEmitter.IterativeOffset>
+																		</DoubleAnimationEmitter>
+																	</AnimationTemplate.Emitters>
+																</AnimationTemplate>
+															</IterativeReaction.AnimationTemplate>
+														</IterativeReaction>
+													</ReactiveStoryboard>
+												</React.Storyboards>
+												<ItemsControl.Height>
+													<Binding RelativeSource="{RelativeSource Self}" Path="ActualWidth"
+																				Converter="{converters:CalendarRowHeightConverter}" ConverterParameter="6"/>
+												</ItemsControl.Height>
+												<ItemsControl.ItemsSource>
+													<Binding Path="CalendarDisplayDays" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+												</ItemsControl.ItemsSource>
+												<ItemsControl.ItemTemplate>
+													<DataTemplate DataType="controls:CalendarDayData">
+														<ToggleButton x:Name="PART_CalendarButton" 
+																												Style="{StaticResource CalendarButton}" 
+																												Content="{Binding}"
+																												controls:CalendarButtonAssist.CalendarDayData="{Binding}"
+																												controls:CalendarButtonAssist.DateTime="{Binding DateTime}"/>
+														<!--<Label x:Name="PART_DayNumberText"  Content="{Binding DayNumber}"
+																				text:TextualStyle.BindingRelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}">
+														<text:TextualStyle.BindStyle>
+															<Binding Path="CalendarValidSelectableDayTextualStyle" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+														</text:TextualStyle.BindStyle>
+													</Label>-->
+
+														<!--<DataTemplate.Triggers>
+													<DataTrigger Binding="{Binding MonthNumber}"
+																										Value="9">
+														<Setter TargetName="PART_DayNumberText"
+																						Property="FontWeight" Value="Heavy"/>
+													</DataTrigger>
+												</DataTemplate.Triggers>-->
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+												<ItemsControl.ItemsPanel>
+													<ItemsPanelTemplate>
+														<UniformGrid Columns="7"/>
+													</ItemsPanelTemplate>
+												</ItemsControl.ItemsPanel>
+											</ItemsControl>
+										</Grid>
+									</StackPanel>
+
+									<ItemsControl x:Name="PART_MonthView"
+																							IsHitTestVisible="False"
+																							VerticalAlignment="Center"
+																							Opacity="0">
+										<ItemsControl.RenderTransform>
+											<TransformGroup>
+												<TranslateTransform/>
+												<ScaleTransform />
+											</TransformGroup>
+										</ItemsControl.RenderTransform>
+										<ItemsControl.Items>
+											<system:String>JAN</system:String>
+											<system:String>FEB</system:String>
+											<system:String>MAR</system:String>
+											<system:String>APR</system:String>
+											<system:String>MAY</system:String>
+											<system:String>JUN</system:String>
+											<system:String>JUL</system:String>
+											<system:String>AUG</system:String>
+											<system:String>SEP</system:String>
+											<system:String>OCT</system:String>
+											<system:String>NOV</system:String>
+											<system:String>DEC</system:String>
+										</ItemsControl.Items>
+										<ItemsControl.ItemTemplate>
+											<DataTemplate DataType="controls:CalendarDayData">
+												<Button Style="{StaticResource FlatButton}" 
+																				Content="{Binding}"
+																				controls:CalendarButtonAssist.DateTime="{Binding DateTime}"
+																				primitives:VisualFeedback.Brush="{StaticResource mtTeal400}">
+													<Button.Height>
+														<Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+													</Button.Height>
+												</Button>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<UniformGrid Columns="4"/>
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+									</ItemsControl>
+									<!--<StackPanel Orientation="Horizontal">
+										<React.Storyboards>
+											<ReactiveStoryboard>
+												<ReactiveStoryboard.DynamicTriggers>
+													<ReactiveDataTrigger Value="True">
+														<ReactiveDataTrigger.Binding>
+															<Binding Path="TestProp" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+														</ReactiveDataTrigger.Binding>
+													</ReactiveDataTrigger>
+												</ReactiveStoryboard.DynamicTriggers>
+												<ReactiveSetter TargetName="PART_Red"
+																												Property="Control.Opacity"
+																												Value=".4"/>
+
+												<ReactiveSetter TargetName="PART_Blue"
+																												Property="Control.Opacity"
+																												Value=".8"/>
+											</ReactiveStoryboard>
+											<ReactiveStoryboard>
+												<ReactiveStoryboard.DynamicTriggers>
+													<ReactiveDataTrigger Value="False">
+														<ReactiveDataTrigger.Binding>
+															<Binding Path="TestProp" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+														</ReactiveDataTrigger.Binding>
+													</ReactiveDataTrigger>
+												</ReactiveStoryboard.DynamicTriggers>
+												<ReactiveSetter TargetName="PART_Red"
+																												Property="Control.Opacity"
+																												Value=".8"/>
+
+												<ReactiveSetter TargetName="PART_Blue"
+																												Property="Control.Opacity"
+																												Value=".4"/>
+											</ReactiveStoryboard>
+										</React.Storyboards>
+										<Border x:Name="PART_Red" 
+																		Background="Red" 
+																		Width="70"
+																		Height="70"
+																		Margin="30">
+											--><!--<React.Storyboards>
+												<ReactiveStoryboard>
+													<ReactiveStoryboard.DynamicTriggers>
+														<ReactiveDataTrigger Value="True">
+															<ReactiveDataTrigger.Binding>
+																<Binding Path="TestProp" RelativeSource="{RelativeSource FindAncestor, AncestorType=controls:DateRangePicker}"/>
+															</ReactiveDataTrigger.Binding>
+														</ReactiveDataTrigger>
+													</ReactiveStoryboard.DynamicTriggers>
+													<ReactiveSetter TargetName="PART_Red"
+																												Property="Control.Opacity"
+																												Value=".4">
+														<ReactiveSetter.TargetObject>
+															<Binding ElementName="PART_DayView"/>
+														</ReactiveSetter.TargetObject>
+													</ReactiveSetter>
+													<ReactiveSetter TargetName="PART_Blue"
+																												Property="Control.Opacity"
+																												Value=".8">
+														<ReactiveSetter.TargetObject>
+															<Binding ElementName="PART_Blue"/>
+														</ReactiveSetter.TargetObject>
+													</ReactiveSetter>
+												</ReactiveStoryboard>
+											</React.Storyboards>--><!--
+										</Border>
+										<Border x:Name="PART_Blue" 
+																		Background="Blue" 
+																		Width="70"
+																		Height="70"
+																		Margin="30"/>
+									</StackPanel>-->
+								</Grid>
+
+								<Grid Row="2">
+									<StackPanel Orientation="Horizontal"
+																					HorizontalAlignment="Right">
+										<Button x:Name="PART_CancelButton" 
+																		Style="{StaticResource FlatButton}"
+																		Content="CANCEL"
+																		primitives:VisualFeedback.Brush="{StaticResource mtRed300}"
+																		Foreground="{StaticResource mtRed400}"/>
+										<Button Style="{StaticResource FlatButton}"
+																		Content="OKAY" 
+																		primitives:VisualFeedback.Brush="{StaticResource mtTeal300}"
+																		Foreground="{StaticResource mtTeal400}"/>
+									</StackPanel>
+								</Grid>
+							</Grid>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

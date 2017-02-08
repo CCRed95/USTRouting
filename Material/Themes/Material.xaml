@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.Flat.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.FloatingActionButton.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.PathButton.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.Raised.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.Toggle.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Button.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Calendar.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Card.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Checkbox.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Clock.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DatePicker.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DateRangePicker.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.DefinedBrushes.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Divider.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Drawables.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ExtendedPalette.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Fonts.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ListView.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ListViewItem.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.NumericIndicator.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Palette.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.PasswordBox.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.RadioButton.xaml"/>
+		
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.ScrollViewer2.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Shadows.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Slider.xaml"/>
+		
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.TabControl.xaml"/>
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.TextBox.xaml"/>
+
+		<ResourceDictionary Source="pack://application:,,,/Material;component/Themes/Material.Window.xaml"/>
+
+	</ResourceDictionary.MergedDictionaries>
+	<Style TargetType="FrameworkElement">
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+	</Style>
+</ResourceDictionary>

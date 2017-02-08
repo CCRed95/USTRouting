@@ -1,0 +1,335 @@
+﻿<UserControl x:Class="UST_Routing.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:UST_Routing.ViewModels"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:data="clr-namespace:UST_Routing.Data"
+             xmlns:domain="clr-namespace:UST_Routing.Data.Domain"
+             mc:Ignorable="d" 
+													StateAssist.State1="{Binding AddJobAssignmentGroupViewState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+													cal:Bind.AtDesignTime="True"
+													Designer.Viewport="HD1080">
+	<Grid Background="{StaticResource mtBlueGrey800}">
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup Name="AddJobAssignmentGroupViewStates">
+				<VisualState Name="AddJobAssignmentGroupViewContractedState">
+					<Storyboard>
+						<ScopedStoryboard Storyboard.TargetName="AddJobAssignmentGroupView">
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+																									To="0.5" 
+																									EasingFunction="{Ease In, Cubic}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+																									To="0.5" 
+																									EasingFunction="{Ease In, Cubic}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+																									To="200"
+																									EasingFunction="{Ease In, Quad}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="Opacity"
+																									To="0" 
+																									EasingFunction="{Ease In, Quad}"/>
+
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
+																																						Duration="0:0:0">
+								<DiscreteObjectKeyFrame KeyTime="0:0:0">
+									<DiscreteObjectKeyFrame.Value>
+										<system:Boolean>False</system:Boolean>
+									</DiscreteObjectKeyFrame.Value>
+								</DiscreteObjectKeyFrame>
+							</ObjectAnimationUsingKeyFrames>
+
+						</ScopedStoryboard>
+					</Storyboard>
+				</VisualState>
+
+				<VisualState Name="AddJobAssignmentGroupViewExpandedState">
+					<Storyboard>
+						<ScopedStoryboard Storyboard.TargetName="AddJobAssignmentGroupView"
+																								BeginTime="0:0:0.7"
+																								Duration="0:0:0.3">
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+																								From=".5"	
+																								To="1" 
+																								EasingFunction="{Ease Out, Cubic}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+																								From=".5"	
+																								To="1"
+																								EasingFunction="{Ease Out, Cubic}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+																								From="-140"
+																								To="0"
+																								EasingFunction="{Ease Out, Quart}"/>
+
+							<DoubleAnimation Storyboard.TargetProperty="Opacity"
+																								To="1" 
+																								EasingFunction="{Ease In, Quad}"/>
+
+
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="IsHitTestVisible"
+																																						Duration="0:0:0">
+								<DiscreteObjectKeyFrame KeyTime="0:0:0">
+									<DiscreteObjectKeyFrame.Value>
+										<system:Boolean>True</system:Boolean>
+									</DiscreteObjectKeyFrame.Value>
+								</DiscreteObjectKeyFrame>
+							</ObjectAnimationUsingKeyFrames>
+						</ScopedStoryboard>
+					</Storyboard>
+				</VisualState>
+
+
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="120"/>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid Background="{StaticResource mtBlueA400}"
+								Grid.Row="0"
+								Panel.ZIndex="100"
+								Shadow.Level="3"
+								Shadow.ForceAllowShadow="True">
+			<StackPanel Orientation="Horizontal"
+															HorizontalAlignment="Left">
+				<Button Style="{StaticResource FlatButtonDarkSurface}">
+					<Button.Width>
+						<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+					</Button.Width>
+					<Path Style="{StaticResource drawablemenu}" RenderTransformOrigin=".5,.5">
+						<Path.RenderTransform>
+							<ScaleTransform ScaleX="2" ScaleY="2"/>
+						</Path.RenderTransform>
+					</Path>
+				</Button>
+				<Button Style="{StaticResource FlatButtonDarkSurface}">
+					<Button.Width>
+						<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+					</Button.Width>
+					<Path Style="{StaticResource drawableapps}" RenderTransformOrigin=".5,.5">
+						<Path.RenderTransform>
+							<ScaleTransform ScaleX="2" ScaleY="2"/>
+						</Path.RenderTransform>
+					</Path>
+				</Button>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal"
+															HorizontalAlignment="Right">
+				<Button Style="{StaticResource FlatButtonDarkSurface}"
+												Command="{Binding LoadDataCommand}">
+					<Button.Width>
+						<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+					</Button.Width>
+					<Path Style="{StaticResource drawablesearch}" RenderTransformOrigin=".5,.5">
+						<Path.RenderTransform>
+							<ScaleTransform ScaleX="2" ScaleY="2"/>
+						</Path.RenderTransform>
+					</Path>
+				</Button>
+				<Button Style="{StaticResource FlatButtonDarkSurface}">
+					<Button.Width>
+						<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
+					</Button.Width>
+					<Path Style="{StaticResource drawablemore_vert}" RenderTransformOrigin=".5,.5">
+						<Path.RenderTransform>
+							<ScaleTransform ScaleX="2" ScaleY="2"/>
+						</Path.RenderTransform>
+					</Path>
+				</Button>
+			</StackPanel>
+		</Grid>
+		<Grid x:Name="PART_Content"
+								Panel.ZIndex="100"
+								Row="1">
+			<ItemsControl ItemsSource="{Binding JobAssignmentGroup.Frozen_JobAssignments}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate DataType="domain:JobAssignment">
+						<Card Shadow.Level="2.5" Shadow.ForceAllowShadow="True"
+												Background="{StaticResource mtGrey400}">
+							<StackPanel Orientation="Vertical">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<Card Shadow.Level="1.5" Shadow.ForceAllowShadow="True">
+									<StackPanel Orientation="Vertical">
+										<Label Foreground="{StaticResource mtGrey700}"
+																	Style="{StaticResource t34pDisplay1}"
+																	FontWeight="Light"
+																	Content="City Data"/>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="CityName"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Frozen_City.CityName}"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="ImagePath"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Frozen_City.ImagePath}"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="LegacyLocationID"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Frozen_City.LegacyLocationID}"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="LegacyLocationMoniker"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Frozen_City.LegacyLocationMoniker}"/>
+										</StackPanel>
+									</StackPanel>
+								</Card>
+									<Card Grid.Column="1"  Shadow.Level="1.5" Shadow.ForceAllowShadow="True">
+										<StackPanel Orientation="Vertical">
+											<Label Foreground="{StaticResource mtGrey700}"
+																	Style="{StaticResource t34pDisplay1}"
+																	FontWeight="Light"
+																	Content="Team Count Info"/>
+											<StackPanel Orientation="Horizontal">
+												<Label Foreground="{StaticResource mtGrey900}"
+														Content="Current Daily Team Count"/>
+												<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding CurrentDailyTeamCount}"/>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal">
+												<Label Foreground="{StaticResource mtGrey900}"
+														Content="FlexTeams"/>
+												<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding FlexTeams}"/>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal">
+												<Label Foreground="{StaticResource mtGrey900}"
+														Content="Total Members"/>
+												<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding TotalMembers}"/>
+											</StackPanel>
+										</StackPanel>
+									</Card>
+									<Card Shadow.Level="1.5" Shadow.ForceAllowShadow="True">
+										<StackPanel Orientation="Vertical">
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition />
+													<ColumnDefinition />
+												</Grid.ColumnDefinitions>
+												<Label Foreground="{StaticResource mtGrey900}"
+														Content="Deadline"/>
+												<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Deadline}" Grid.Column="1"/>
+											</Grid>
+										</StackPanel>
+									</Card>
+								</Grid>
+								
+
+								<Card Shadow.Level="1.5" Shadow.ForceAllowShadow="True">
+									<StackPanel Orientation="Vertical">
+										<Label Foreground="{StaticResource mtGrey700}"
+																	Style="{StaticResource t34pDisplay1}"
+																	FontWeight="Light"
+																	Content="More Info"/>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="Has Stores"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding HasStores}"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="Is Auto Input"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding IsAutoInput}"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="Is Soft Route"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding IsSoftRoute}"/>
+										</StackPanel>
+									</StackPanel>
+								</Card>
+								<Card Shadow.Level="1.5" Shadow.ForceAllowShadow="True">
+									<StackPanel Orientation="Vertical">
+										<StackPanel Orientation="Vertical">
+											<Label Foreground="{StaticResource mtGrey900}"
+														Content="Notes"/>
+											<Label Foreground="{StaticResource mtBlue500}"
+														Content="{Binding Notes}"/>
+										</StackPanel>
+									</StackPanel>
+								</Card>
+								<Card>
+									<StackPanel Orientation="Vertical">
+										<Label Foreground="{StaticResource mtGrey700}"
+																	Style="{StaticResource t34pDisplay1}"
+																	FontWeight="Light"
+																	Content="Checkpoints"/>
+										<ItemsControl ItemsSource="{Binding Frozen_JobAssignmentCheckpoints}">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate DataType="domain:JobAssignmentCheckpoint">
+													<Card Shadow.Level="1" 
+																			Shadow.ForceAllowShadow="True"
+																			Margin="2">
+														<Grid Background="{StaticResource mtGrey100}">
+															<Grid.ColumnDefinitions>
+																<ColumnDefinition />
+																<ColumnDefinition />
+															</Grid.ColumnDefinitions>
+															<Label Foreground="{StaticResource mtGrey900}"
+																						Content="{Binding CheckpointTypeEnum}"/>
+															<Label Foreground="{StaticResource mtRed500}"
+																						Content="{Binding CheckpointDeadline}" Grid.Column="1"/>
+														</Grid>
+													</Card>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<StackPanel Orientation="Vertical"/>
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+										</ItemsControl>
+									</StackPanel>
+								</Card>
+							</StackPanel>
+						</Card>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Horizontal"/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
+			<ContentControl x:Name="AddJobAssignmentGroupView"
+																		Style="{StaticResource ModalPopup_Contracted}"
+																		Width="1280"
+																		Height="720"/>
+
+			<Button Style="{StaticResource FloatingActionButton}"
+											Width="120"
+											Height="120"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Bottom"
+											Background="{StaticResource mtPinkA200}"
+											Command="{Binding ExpandAddJobAssignmentGroupViewCommand}">
+				<Button.RenderTransform>
+					<TranslateTransform X="-100" Y="-70"/>
+				</Button.RenderTransform>
+				<Path Style="{StaticResource drawableadd}"/>
+			</Button>
+		</Grid>
+	</Grid>
+</UserControl>

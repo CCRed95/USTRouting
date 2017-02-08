@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="USTRouting" EntityNamespace="UST_Routing.Data.Domain" Class="USTDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ERIC-ASUS-PC;Initial Catalog=USTRouting;Integrated Security=True" SettingsObjectName="UST_Routing.Properties.Settings" SettingsPropertyName="USTRoutingConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AssignedJobs" Member="AssignedJobs">
+    <Type Name="AssignedJob">
+      <Column Name="JobID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DestinationCityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Deadline" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentDailyTeamCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FlexTeam" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="TimeZoneOffset" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserAccounts" Member="UserAccounts">
+    <Type Name="UserAccount">
+      <Column Name="UserAccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="JobTitle" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ImagePath" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Association Name="UserAccount_JobAssignmentGroup" Member="JobAssignmentGroups" ThisKey="UserAccountID" OtherKey="AssociatedAccountID" Type="JobAssignmentGroup" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cities" Member="Cities">
+    <Type Name="City">
+      <Column Name="CityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CityName" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="ImagePath" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="LegacyLocationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LegacyLocationMoniker" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="TimeZoneOffset" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Inferred" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="City_JobAssignment" Member="JobAssignments" ThisKey="CityID" OtherKey="AssociatedCityID" Type="JobAssignment" />
+      <Association Name="City_Store" Member="Stores" ThisKey="CityID" OtherKey="AssociatedCityID" Type="Store" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JobAssignmentCheckpoints" Member="JobAssignmentCheckpoints">
+    <Type Name="JobAssignmentCheckpoint">
+      <Column Name="JobAssignmentCheckpointID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AssociatedJobAssignmentID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckPointType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckpointDeadline" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Association Name="JobAssignment_JobAssignmentCheckpoint" Member="JobAssignment" ThisKey="AssociatedJobAssignmentID" OtherKey="JobAssignmentID" Type="JobAssignment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JobAssignmentGroups" Member="JobAssignmentGroups">
+    <Type Name="JobAssignmentGroup">
+      <Column Name="AssignmentGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AssociatedAccountID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="JobAssignmentGroup_JobAssignment" Member="JobAssignments" ThisKey="AssignmentGroupID" OtherKey="JobAssignmentGroupMemberID" Type="JobAssignment" />
+      <Association Name="UserAccount_JobAssignmentGroup" Member="UserAccount" ThisKey="AssociatedAccountID" OtherKey="UserAccountID" Type="UserAccount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JobAssignments" Member="JobAssignments">
+    <Type Name="JobAssignment">
+      <Column Name="JobAssignmentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="JobAssignmentGroupMemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AssociatedCityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Deadline" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="CurrentDailyTeamCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FlexTeams" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HasStores" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAutoInput" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSoftRoute" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Association Name="JobAssignment_JobAssignmentCheckpoint" Member="JobAssignmentCheckpoints" ThisKey="JobAssignmentID" OtherKey="AssociatedJobAssignmentID" Type="JobAssignmentCheckpoint" />
+      <Association Name="City_JobAssignment" Member="City" ThisKey="AssociatedCityID" OtherKey="CityID" Type="City" IsForeignKey="true" />
+      <Association Name="JobAssignmentGroup_JobAssignment" Member="JobAssignmentGroup" ThisKey="JobAssignmentGroupMemberID" OtherKey="AssignmentGroupID" Type="JobAssignmentGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Stores" Member="Stores">
+    <Type Name="Store">
+      <Column Name="StoreID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LegacyStoreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AssociatedCityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StreetAddress" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine2" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="ZipCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="City_Store" Member="City" ThisKey="AssociatedCityID" OtherKey="CityID" Type="City" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
