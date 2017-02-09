@@ -65,9 +65,6 @@
 														CaretBrush="{StaticResource mtPink800}"
 														Foreground="{StaticResource mtPinkA700}"
 														Text="{Binding EmailAddress}">
-						<HintAssist.VisualStateManagerService>
-							<HintVisualStateManagerService/>
-						</HintAssist.VisualStateManagerService>
 						<HintAssist.Validator>
 							<EmailValidator/>
 						</HintAssist.Validator>

@@ -16,9 +16,10 @@ namespace UST_Routing.Data.Domain
 
 		public CheckpointType CheckpointTypeEnum => CheckpointTypeEnumProperty.GetValue(this);
 
-		public JobAssignmentCheckpoint(JobAssignment jobAssignment, CheckpointType type, DateTime checkpointDeadline)
+		//Assign(jobAssignmentCheckpoints);
+		public JobAssignmentCheckpoint(DateTime checkpointDeadline, CheckpointType type) : this()
 		{
-			JobAssignment = jobAssignment;
+			//JobAssignment = jobAssignment;
 			CheckPointType = (int)type;
 			CheckpointDeadline = checkpointDeadline;
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Core.Extensions;
 using Material.Extensions;
 
 namespace Material.Controls.Adapters

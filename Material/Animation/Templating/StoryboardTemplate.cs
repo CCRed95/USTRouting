@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Core.Extensions;
 using Material.Extensions;
 
 namespace Material.Animation.Templating

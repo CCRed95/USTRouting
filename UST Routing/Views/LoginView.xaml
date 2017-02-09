@@ -71,9 +71,6 @@
 														CaretBrush="{StaticResource mtPink800}"
 														Foreground="{StaticResource mtPinkA700}"
 														Text="{Binding Username}">
-						<HintAssist.VisualStateManagerService>
-							<HintVisualStateManagerService/>
-						</HintAssist.VisualStateManagerService>
 					</TextBox>
 
 

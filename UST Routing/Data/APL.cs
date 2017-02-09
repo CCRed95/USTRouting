@@ -34,16 +34,37 @@ namespace UST_Routing.Data
 
 		#endregion
 
+		public void BeginContextTransaction()
+		{
+			commonContext = true;
+		}
 
+		public void EndContextTransaction()
+		{
+			commonContext = false;
+			sharedTransactionScopeCompleted = true;
+		}
+
+		private bool commonContext = false;
+		private bool sharedTransactionScopeCompleted = false;
+
+		protected USTDataContext lastDataContext;
 		protected USTDataContext ctx
 		{
 			get
 			{
-				return new USTDataContext();
+				if (!commonContext)
+				{
+					if (sharedTransactionScopeCompleted)
+					{
+						lastDataContext.Dispose();
+						lastDataContext = null;
+						sharedTransactionScopeCompleted = false;
+					}
+					return new USTDataContext();
+				}
+				return lastDataContext ?? (lastDataContext = new USTDataContext());
 			}
 		}
-
-	
-
 	}
 }

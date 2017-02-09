@@ -16,17 +16,17 @@
 	</ResourceDictionary.MergedDictionaries>
 
 	<Style TargetType="TextBox" BasedOn="{StaticResource t15pSubhead}" x:Key="HintedTextBox">
-		<!--<Setter Property="MinHeight" Value="50"/>-->
+		<Setter Property="MinHeight" Value="50"/>
 		<Setter Property="BorderBrush" Value="{StaticResource mtGrey600}"/>
 		<Setter Property="CaretBrush" Value="{StaticResource mtBlueGrey800}"/>
 		<Setter Property="HorizontalContentAlignment" Value="Left"/>
 		<Setter Property="primitives:MD.Theme" Value="{StaticResource Teal}"/>
 		<Setter Property="Margin" Value="5 3"/>
-		<!--<Setter Property="behaviors:HintAssist.VisualStateManagerService">
+		<Setter Property="behaviors:HintAssist.VisualStateManagerService">
 			<Setter.Value>
 				<behaviors:HintVisualStateManagerService/>
 			</Setter.Value>
-		</Setter>-->
+		</Setter>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
@@ -169,17 +169,9 @@
 									<ColumnDefinition />
 								</Grid.ColumnDefinitions>
 								<Viewbox Width="40" Height="40">
-									<!--<Viewbox.Height>
-										<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType=Grid}" Path="ActualHeight"/>
-									</Viewbox.Height>
-									<Viewbox.Width>
-										<Binding RelativeSource="{RelativeSource Self}" Path="ActualHeight"/>
-									</Viewbox.Width>-->
-									<Canvas>
-										<Path Style="{StaticResource drawable}"
+									<Path Style="{StaticResource drawable}"
 																Data="{Binding Path=(behaviors:HintAssist.IconGeometry), RelativeSource={RelativeSource TemplatedParent}}" 
 																Fill="{TemplateBinding Foreground}"/>
-									</Canvas>
 								</Viewbox>
 								<Grid Column="1">
 									<StackPanel Orientation="Vertical">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq.SqlClient;
 using System.Linq;
 using JetBrains.Annotations;
 using UST_Routing.Data.Domain;
@@ -7,6 +8,7 @@ namespace UST_Routing.Data
 {
 	public partial class APL
 	{
+		[NotNull]
 		public City AddCity(City city)
 		{
 			using (var context = ctx)
@@ -14,6 +16,7 @@ namespace UST_Routing.Data
 				return AddCityImpl(context, city);
 			}
 		}
+		[NotNull]
 		protected City AddCityImpl(
 			[NotNull] USTDataContext context,
 			City city,
@@ -29,55 +32,87 @@ namespace UST_Routing.Data
 			}
 			return city;
 		}
-	
 
 
-
-		public City[] GetGlobalCities()
+		public City[] GetAllCities()
 		{
-			using (var context = new USTDataContext())
+			using (var context = ctx)
 			{
 				return context.Cities.ToArray();
 			}
 		}
 
-		public City GetCity(string cityName)
+
+		[CanBeNull]
+		public City FetchCity(int cityID)
 		{
-			using (var context = new USTDataContext())
+			using (var context = ctx)
 			{
-				return context.Cities.Single(user => user.CityName == cityName);
+				return FetchCityImpl(context, cityID);
 			}
 		}
-		public City GetCity(string cityName, USTDataContext context)
+		[CanBeNull]
+		protected City FetchCityImpl(
+			[NotNull] USTDataContext context,
+			int cityID)
 		{
-			return context.Cities.Single(user => user.CityName == cityName);
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+
+			return context.Cities.SingleOrDefault(t => t.CityID == cityID);
 		}
 
-		public bool TryGetCity(string cityName, out City city)
-		{
-			try
-			{
-				using (var context = new USTDataContext())
-				{
-					city = context.Cities.Single(user => user.CityName == cityName);
-				}
-				return true;
-			}
-			catch
-			{
-				city = default(City);
-				return false;
-			}
 
-		}
-
-		public City GetCity(int cityID)
+		[CanBeNull]
+		public City FetchCityByName(string cityName)
 		{
-			using (var context = new USTDataContext())
+			using (var context = ctx)
 			{
-				return context.Cities.Single(user => user.CityID == cityID);
+				return FetchCityByNameImpl(context, cityName);
 			}
 		}
+		[CanBeNull]
+		public City FetchCityByNameCaseInsensitive(string cityName)
+		{
+			using (var context = ctx)
+			{
+				return FetchCityByNameImpl(context, cityName, true);
+			}
+		}
+		[CanBeNull]
+		protected City FetchCityByNameImpl(
+			USTDataContext context,
+			string cityName,
+			bool ignoreCase = false)
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+
+			if (ignoreCase)
+				return context.Cities.SingleOrDefault(t => SqlMethods.Like(t.CityName, cityName));
+			return context.Cities.SingleOrDefault(t => t.CityName == cityName);
+		}
+
+
+		[CanBeNull]
+		public City FetchCityByLegacyMonikerCaseInsensitive(string legacyCityMoniker)
+		{
+			using (var context = ctx)
+			{
+				return FetchCityByLegacyMonikerCaseInsensitiveImpl(context, legacyCityMoniker);
+			}
+		}
+		[CanBeNull]
+		protected City FetchCityByLegacyMonikerCaseInsensitiveImpl(
+			USTDataContext context,
+			string legacyCityMoniker)
+		{
+			if (context == null)
+				throw new ArgumentNullException(nameof(context));
+
+			return context.Cities.SingleOrDefault(t => SqlMethods.Like(t.LegacyLocationMoniker, legacyCityMoniker));
+		}
+
 
 	}
 }

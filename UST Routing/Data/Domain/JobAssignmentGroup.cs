@@ -1,27 +1,33 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data;
+using System.Linq;
 using Caliburn.Micro;
+using Core.Data;
 using Core.Data.CachedObjects;
+using Core.Extensions;
+using UST_Routing.Data.Persistance;
 
 namespace UST_Routing.Data.Domain
 {
-	public partial class JobAssignmentGroup : LinqEntity, IFreezableLinqEntity
+	public partial class JobAssignmentGroup : LinqEntity
 	{
 		//ReSharper disable once UnusedMember.Local
 		partial void OnLoaded() => ((ILinqEntity)this).OnLoaded();
 
-		public UserAccount Frozen_UserAccount { get; private set; }
-
-		public BindableCollection<JobAssignment> Frozen_JobAssignments { get; private set; }
-
-		public void FreezeEntity()
-		{
-			Frozen_UserAccount = UserAccount;
-			var jobAssignments = JobAssignments.ToArray();
-			Frozen_JobAssignments = new BindableCollection<JobAssignment>(jobAssignments);
-			foreach (var i in Frozen_JobAssignments)
+	}
+	public partial class JobAssignmentGroup : IJobAssignmentGroupQueryable
+	{
+		UserAccount IJobAssignmentGroupQueryable.__UserAccount
+			=> new Ref<int, UserAccount>(AssociatedAccountID, APL.I.FetchUserAccount);
+		
+		BindableCollection<JobAssignment> IJobAssignmentGroupQueryable.__JobAssignments
+			=> new Ref<int, BindableCollection<JobAssignment>>(AssignmentGroupID, o =>
 			{
-				i.FreezeEntity();
-			}
-		}
+				var assignmentGroup = APL.I.FetchJobAssignmentGroup(o);
+				if (assignmentGroup == null)
+					throw new DataException();
+
+				return assignmentGroup.JobAssignments.ToBindable();
+			});
 	}
 }

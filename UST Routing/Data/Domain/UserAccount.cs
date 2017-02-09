@@ -17,7 +17,7 @@ namespace UST_Routing.Data.Domain
 			string firstName,
 			string lastName,
 			string jobTitle = null,
-			string imagePath = null)
+			string imagePath = null) : this()
 		{
 			Username = username;
 			EmailAddress = emailAddress;

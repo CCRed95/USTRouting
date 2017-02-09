@@ -104,10 +104,19 @@
     </ApplicationDefinition>
     <Compile Include="Data\APL.ActiveAccount.cs" />
     <Compile Include="Data\APL.Cities.cs" />
+    <Compile Include="Data\APL.JobAssignment.cs" />
+    <Compile Include="Data\APL.JobAssignmentCheckpoint.cs" />
+    <Compile Include="Data\APL.JobAssignmentGroup.cs" />
+    <Compile Include="Data\APL.States.cs" />
     <Compile Include="Data\APL.UserAccounts.cs" />
     <Compile Include="Data\Domain\City.cs" />
+    <Compile Include="Data\Domain\State.cs" />
     <Compile Include="Data\Domain\Store.cs" />
     <Compile Include="Data\Domain\UserAccount.cs" />
+    <Compile Include="Data\Factory\JobAssignmentGroupFactory.cs" />
+    <Compile Include="Data\Persistance\ICityQueryable.cs" />
+    <Compile Include="Data\Persistance\IJobAssignmentGroupQueryable.cs" />
+    <Compile Include="Data\Persistance\IJobAssignmentQueryable.cs" />
     <Compile Include="Data\UST.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -13,6 +13,9 @@
              d:DataContext="{d:DesignInstance viewModels:MainViewModel, IsDesignTimeCreatable=True}"
 													cal:Bind.AtDesignTime="True"
 													Designer.Viewport="HD1080">
+	<UserControl.Resources>
+		
+	</UserControl.Resources>
 	<Grid Background="{StaticResource mtBlueGrey800}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup Name="AddJobAssignmentGroupViewStates">

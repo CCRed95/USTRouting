@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UST_Routing.Data;
 
 namespace UST_Routing.Views
 {
 	/// <summary>
 	/// Interaction logic for MainView.xaml
 	/// </summary>
-	public partial class MainView : UserControl
+	public partial class MainView 
 	{
 		public MainView()
 		{

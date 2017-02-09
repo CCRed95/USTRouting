@@ -138,6 +138,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\FileSystemExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IntrinsicExtensions.cs" />
     <Compile Include="Extensions\InvocationExtensions.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Extensions\SQLExtentions.cs" />
     <Compile Include="Extensions\StyleExtensions.cs" />
     <Compile Include="Extensions\TimeExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\WindowExtentions.cs" />
     <Compile Include="FlexParser\FlexParser.cs" />
     <Compile Include="FlexParser\Lexer\FlexLexer.cs" />

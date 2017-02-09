@@ -22,7 +22,7 @@ namespace UST_Routing.Data.Domain
 			{
 				mailingAddress += $", {i.AddressLine2}";
 			}
-			mailingAddress += $", {i.City.CityName} %StateName%, {i.ZipCode}";
+			mailingAddress += $", {i.City.CityName} {i.City.State.StateName}, {i.ZipCode}";
 			return mailingAddress;
 		}
 
@@ -30,7 +30,7 @@ namespace UST_Routing.Data.Domain
 			City city,
 			string streetAddress,
 			int zipCode,
-			string addressLine2 = null)
+			string addressLine2 = null) : this()
 		{
 			LegacyStoreID = legacyStoreID;
 			City = city;

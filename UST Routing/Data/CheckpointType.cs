@@ -1,4 +1,4 @@
-﻿namespace UST_Routing.Data.ProjectedTypes
+﻿namespace UST_Routing.Data
 {
 	public enum CheckpointType
 	{
@@ -10,6 +10,7 @@
 		Export = 500,
 		ScheduleMailText = 600,
 		ScheduleCalls = 700,
-		UnconfirmedCalls = 800
+		UnconfirmedCalls = 800,
+		UnconfirmedCallsII = 900
 	}
 }

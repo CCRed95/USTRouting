@@ -173,7 +173,6 @@
     <Compile Include="Design\Text\TextualStyleRenderingAllocator.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\IntrinsicExtensions.cs" />
     <Compile Include="Extensions\MediaExtensions.cs" />
     <Compile Include="Markup\Converters\BrushToRadialGradientBrushConverter.cs" />
     <Compile Include="Markup\Converters\ClockLineConverter.cs" />

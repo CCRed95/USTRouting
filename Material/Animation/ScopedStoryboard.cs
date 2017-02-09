@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Core.Extensions;
 using Material.Extensions;
 using MS.Internal;
 

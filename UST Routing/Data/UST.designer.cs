@@ -28,15 +28,12 @@ namespace UST_Routing.Data
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
-    partial void UpdateAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
-    partial void DeleteAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
     partial void InsertUserAccount(UST_Routing.Data.Domain.UserAccount instance);
     partial void UpdateUserAccount(UST_Routing.Data.Domain.UserAccount instance);
     partial void DeleteUserAccount(UST_Routing.Data.Domain.UserAccount instance);
-    partial void InsertCity(UST_Routing.Data.Domain.City instance);
-    partial void UpdateCity(UST_Routing.Data.Domain.City instance);
-    partial void DeleteCity(UST_Routing.Data.Domain.City instance);
+    partial void InsertAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
+    partial void UpdateAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
+    partial void DeleteAssignedJob(UST_Routing.Data.Domain.AssignedJob instance);
     partial void InsertJobAssignmentCheckpoint(UST_Routing.Data.Domain.JobAssignmentCheckpoint instance);
     partial void UpdateJobAssignmentCheckpoint(UST_Routing.Data.Domain.JobAssignmentCheckpoint instance);
     partial void DeleteJobAssignmentCheckpoint(UST_Routing.Data.Domain.JobAssignmentCheckpoint instance);
@@ -46,9 +43,15 @@ namespace UST_Routing.Data
     partial void InsertJobAssignment(UST_Routing.Data.Domain.JobAssignment instance);
     partial void UpdateJobAssignment(UST_Routing.Data.Domain.JobAssignment instance);
     partial void DeleteJobAssignment(UST_Routing.Data.Domain.JobAssignment instance);
+    partial void InsertState(UST_Routing.Data.Domain.State instance);
+    partial void UpdateState(UST_Routing.Data.Domain.State instance);
+    partial void DeleteState(UST_Routing.Data.Domain.State instance);
     partial void InsertStore(UST_Routing.Data.Domain.Store instance);
     partial void UpdateStore(UST_Routing.Data.Domain.Store instance);
     partial void DeleteStore(UST_Routing.Data.Domain.Store instance);
+    partial void InsertCity(UST_Routing.Data.Domain.City instance);
+    partial void UpdateCity(UST_Routing.Data.Domain.City instance);
+    partial void DeleteCity(UST_Routing.Data.Domain.City instance);
     #endregion
 		
 		public USTDataContext() : 
@@ -81,14 +84,6 @@ namespace UST_Routing.Data
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<UST_Routing.Data.Domain.AssignedJob> AssignedJobs
-		{
-			get
-			{
-				return this.GetTable<UST_Routing.Data.Domain.AssignedJob>();
-			}
-		}
-		
 		public System.Data.Linq.Table<UST_Routing.Data.Domain.UserAccount> UserAccounts
 		{
 			get
@@ -97,11 +92,11 @@ namespace UST_Routing.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<UST_Routing.Data.Domain.City> Cities
+		public System.Data.Linq.Table<UST_Routing.Data.Domain.AssignedJob> AssignedJobs
 		{
 			get
 			{
-				return this.GetTable<UST_Routing.Data.Domain.City>();
+				return this.GetTable<UST_Routing.Data.Domain.AssignedJob>();
 			}
 		}
 		
@@ -129,11 +124,27 @@ namespace UST_Routing.Data
 			}
 		}
 		
+		public System.Data.Linq.Table<UST_Routing.Data.Domain.State> States
+		{
+			get
+			{
+				return this.GetTable<UST_Routing.Data.Domain.State>();
+			}
+		}
+		
 		public System.Data.Linq.Table<UST_Routing.Data.Domain.Store> Stores
 		{
 			get
 			{
 				return this.GetTable<UST_Routing.Data.Domain.Store>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UST_Routing.Data.Domain.City> Cities
+		{
+			get
+			{
+				return this.GetTable<UST_Routing.Data.Domain.City>();
 			}
 		}
 	}
@@ -145,260 +156,6 @@ namespace UST_Routing.Data.Domain
 	using System.ComponentModel;
 	using System;
 	
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AssignedJobs")]
-	public partial class AssignedJob : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _JobID;
-		
-		private int _DestinationCityID;
-		
-		private System.DateTime _Deadline;
-		
-		private int _CurrentDailyTeamCount;
-		
-		private System.Nullable<int> _FlexTeam;
-		
-		private string _State;
-		
-		private System.Nullable<long> _Latitude;
-		
-		private System.Nullable<long> _Longitude;
-		
-		private System.Nullable<int> _TimeZoneOffset;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnJobIDChanging(int value);
-    partial void OnJobIDChanged();
-    partial void OnDestinationCityIDChanging(int value);
-    partial void OnDestinationCityIDChanged();
-    partial void OnDeadlineChanging(System.DateTime value);
-    partial void OnDeadlineChanged();
-    partial void OnCurrentDailyTeamCountChanging(int value);
-    partial void OnCurrentDailyTeamCountChanged();
-    partial void OnFlexTeamChanging(System.Nullable<int> value);
-    partial void OnFlexTeamChanged();
-    partial void OnStateChanging(string value);
-    partial void OnStateChanged();
-    partial void OnLatitudeChanging(System.Nullable<long> value);
-    partial void OnLatitudeChanged();
-    partial void OnLongitudeChanging(System.Nullable<long> value);
-    partial void OnLongitudeChanged();
-    partial void OnTimeZoneOffsetChanging(System.Nullable<int> value);
-    partial void OnTimeZoneOffsetChanged();
-    #endregion
-		
-		public AssignedJob()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JobID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int JobID
-		{
-			get
-			{
-				return this._JobID;
-			}
-			set
-			{
-				if ((this._JobID != value))
-				{
-					this.OnJobIDChanging(value);
-					this.SendPropertyChanging();
-					this._JobID = value;
-					this.SendPropertyChanged("JobID");
-					this.OnJobIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DestinationCityID", DbType="Int NOT NULL")]
-		public int DestinationCityID
-		{
-			get
-			{
-				return this._DestinationCityID;
-			}
-			set
-			{
-				if ((this._DestinationCityID != value))
-				{
-					this.OnDestinationCityIDChanging(value);
-					this.SendPropertyChanging();
-					this._DestinationCityID = value;
-					this.SendPropertyChanged("DestinationCityID");
-					this.OnDestinationCityIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deadline", DbType="DateTime2 NOT NULL")]
-		public System.DateTime Deadline
-		{
-			get
-			{
-				return this._Deadline;
-			}
-			set
-			{
-				if ((this._Deadline != value))
-				{
-					this.OnDeadlineChanging(value);
-					this.SendPropertyChanging();
-					this._Deadline = value;
-					this.SendPropertyChanged("Deadline");
-					this.OnDeadlineChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentDailyTeamCount", DbType="Int NOT NULL")]
-		public int CurrentDailyTeamCount
-		{
-			get
-			{
-				return this._CurrentDailyTeamCount;
-			}
-			set
-			{
-				if ((this._CurrentDailyTeamCount != value))
-				{
-					this.OnCurrentDailyTeamCountChanging(value);
-					this.SendPropertyChanging();
-					this._CurrentDailyTeamCount = value;
-					this.SendPropertyChanged("CurrentDailyTeamCount");
-					this.OnCurrentDailyTeamCountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlexTeam", DbType="Int")]
-		public System.Nullable<int> FlexTeam
-		{
-			get
-			{
-				return this._FlexTeam;
-			}
-			set
-			{
-				if ((this._FlexTeam != value))
-				{
-					this.OnFlexTeamChanging(value);
-					this.SendPropertyChanging();
-					this._FlexTeam = value;
-					this.SendPropertyChanged("FlexTeam");
-					this.OnFlexTeamChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(30)")]
-		public string State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="BigInt")]
-		public System.Nullable<long> Latitude
-		{
-			get
-			{
-				return this._Latitude;
-			}
-			set
-			{
-				if ((this._Latitude != value))
-				{
-					this.OnLatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Latitude = value;
-					this.SendPropertyChanged("Latitude");
-					this.OnLatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="BigInt")]
-		public System.Nullable<long> Longitude
-		{
-			get
-			{
-				return this._Longitude;
-			}
-			set
-			{
-				if ((this._Longitude != value))
-				{
-					this.OnLongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._Longitude = value;
-					this.SendPropertyChanged("Longitude");
-					this.OnLongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeZoneOffset", DbType="Int")]
-		public System.Nullable<int> TimeZoneOffset
-		{
-			get
-			{
-				return this._TimeZoneOffset;
-			}
-			set
-			{
-				if ((this._TimeZoneOffset != value))
-				{
-					this.OnTimeZoneOffsetChanging(value);
-					this.SendPropertyChanging();
-					this._TimeZoneOffset = value;
-					this.SendPropertyChanged("TimeZoneOffset");
-					this.OnTimeZoneOffsetChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserAccounts")]
 	public partial class UserAccount : INotifyPropertyChanging, INotifyPropertyChanged
@@ -706,21 +463,21 @@ namespace UST_Routing.Data.Domain
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cities")]
-	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AssignedJobs")]
+	public partial class AssignedJob : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CityID;
+		private int _JobID;
 		
-		private string _CityName;
+		private int _DestinationCityID;
 		
-		private string _ImagePath;
+		private System.DateTime _Deadline;
 		
-		private int _LegacyLocationID;
+		private int _CurrentDailyTeamCount;
 		
-		private string _LegacyLocationMoniker;
+		private System.Nullable<int> _FlexTeam;
 		
 		private string _State;
 		
@@ -730,26 +487,20 @@ namespace UST_Routing.Data.Domain
 		
 		private System.Nullable<int> _TimeZoneOffset;
 		
-		private bool _Inferred;
-		
-		private EntitySet<JobAssignment> _JobAssignments;
-		
-		private EntitySet<Store> _Stores;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCityIDChanging(int value);
-    partial void OnCityIDChanged();
-    partial void OnCityNameChanging(string value);
-    partial void OnCityNameChanged();
-    partial void OnImagePathChanging(string value);
-    partial void OnImagePathChanged();
-    partial void OnLegacyLocationIDChanging(int value);
-    partial void OnLegacyLocationIDChanged();
-    partial void OnLegacyLocationMonikerChanging(string value);
-    partial void OnLegacyLocationMonikerChanged();
+    partial void OnJobIDChanging(int value);
+    partial void OnJobIDChanged();
+    partial void OnDestinationCityIDChanging(int value);
+    partial void OnDestinationCityIDChanged();
+    partial void OnDeadlineChanging(System.DateTime value);
+    partial void OnDeadlineChanged();
+    partial void OnCurrentDailyTeamCountChanging(int value);
+    partial void OnCurrentDailyTeamCountChanged();
+    partial void OnFlexTeamChanging(System.Nullable<int> value);
+    partial void OnFlexTeamChanged();
     partial void OnStateChanging(string value);
     partial void OnStateChanged();
     partial void OnLatitudeChanging(System.Nullable<long> value);
@@ -758,113 +509,109 @@ namespace UST_Routing.Data.Domain
     partial void OnLongitudeChanged();
     partial void OnTimeZoneOffsetChanging(System.Nullable<int> value);
     partial void OnTimeZoneOffsetChanged();
-    partial void OnInferredChanging(bool value);
-    partial void OnInferredChanged();
     #endregion
 		
-		public City()
+		public AssignedJob()
 		{
-			this._JobAssignments = new EntitySet<JobAssignment>(new Action<JobAssignment>(this.attach_JobAssignments), new Action<JobAssignment>(this.detach_JobAssignments));
-			this._Stores = new EntitySet<Store>(new Action<Store>(this.attach_Stores), new Action<Store>(this.detach_Stores));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CityID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JobID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int JobID
 		{
 			get
 			{
-				return this._CityID;
+				return this._JobID;
 			}
 			set
 			{
-				if ((this._CityID != value))
+				if ((this._JobID != value))
 				{
-					this.OnCityIDChanging(value);
+					this.OnJobIDChanging(value);
 					this.SendPropertyChanging();
-					this._CityID = value;
-					this.SendPropertyChanged("CityID");
-					this.OnCityIDChanged();
+					this._JobID = value;
+					this.SendPropertyChanged("JobID");
+					this.OnJobIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityName", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
-		public string CityName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DestinationCityID", DbType="Int NOT NULL")]
+		public int DestinationCityID
 		{
 			get
 			{
-				return this._CityName;
+				return this._DestinationCityID;
 			}
 			set
 			{
-				if ((this._CityName != value))
+				if ((this._DestinationCityID != value))
 				{
-					this.OnCityNameChanging(value);
+					this.OnDestinationCityIDChanging(value);
 					this.SendPropertyChanging();
-					this._CityName = value;
-					this.SendPropertyChanged("CityName");
-					this.OnCityNameChanged();
+					this._DestinationCityID = value;
+					this.SendPropertyChanged("DestinationCityID");
+					this.OnDestinationCityIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath", DbType="VarChar(400) NOT NULL", CanBeNull=false)]
-		public string ImagePath
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deadline", DbType="DateTime2 NOT NULL")]
+		public System.DateTime Deadline
 		{
 			get
 			{
-				return this._ImagePath;
+				return this._Deadline;
 			}
 			set
 			{
-				if ((this._ImagePath != value))
+				if ((this._Deadline != value))
 				{
-					this.OnImagePathChanging(value);
+					this.OnDeadlineChanging(value);
 					this.SendPropertyChanging();
-					this._ImagePath = value;
-					this.SendPropertyChanged("ImagePath");
-					this.OnImagePathChanged();
+					this._Deadline = value;
+					this.SendPropertyChanged("Deadline");
+					this.OnDeadlineChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegacyLocationID", DbType="Int NOT NULL")]
-		public int LegacyLocationID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurrentDailyTeamCount", DbType="Int NOT NULL")]
+		public int CurrentDailyTeamCount
 		{
 			get
 			{
-				return this._LegacyLocationID;
+				return this._CurrentDailyTeamCount;
 			}
 			set
 			{
-				if ((this._LegacyLocationID != value))
+				if ((this._CurrentDailyTeamCount != value))
 				{
-					this.OnLegacyLocationIDChanging(value);
+					this.OnCurrentDailyTeamCountChanging(value);
 					this.SendPropertyChanging();
-					this._LegacyLocationID = value;
-					this.SendPropertyChanged("LegacyLocationID");
-					this.OnLegacyLocationIDChanged();
+					this._CurrentDailyTeamCount = value;
+					this.SendPropertyChanged("CurrentDailyTeamCount");
+					this.OnCurrentDailyTeamCountChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegacyLocationMoniker", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string LegacyLocationMoniker
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FlexTeam", DbType="Int")]
+		public System.Nullable<int> FlexTeam
 		{
 			get
 			{
-				return this._LegacyLocationMoniker;
+				return this._FlexTeam;
 			}
 			set
 			{
-				if ((this._LegacyLocationMoniker != value))
+				if ((this._FlexTeam != value))
 				{
-					this.OnLegacyLocationMonikerChanging(value);
+					this.OnFlexTeamChanging(value);
 					this.SendPropertyChanging();
-					this._LegacyLocationMoniker = value;
-					this.SendPropertyChanged("LegacyLocationMoniker");
-					this.OnLegacyLocationMonikerChanged();
+					this._FlexTeam = value;
+					this.SendPropertyChanged("FlexTeam");
+					this.OnFlexTeamChanged();
 				}
 			}
 		}
@@ -949,52 +696,6 @@ namespace UST_Routing.Data.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Inferred", DbType="Bit NOT NULL")]
-		public bool Inferred
-		{
-			get
-			{
-				return this._Inferred;
-			}
-			set
-			{
-				if ((this._Inferred != value))
-				{
-					this.OnInferredChanging(value);
-					this.SendPropertyChanging();
-					this._Inferred = value;
-					this.SendPropertyChanged("Inferred");
-					this.OnInferredChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_JobAssignment", Storage="_JobAssignments", ThisKey="CityID", OtherKey="AssociatedCityID")]
-		public EntitySet<JobAssignment> JobAssignments
-		{
-			get
-			{
-				return this._JobAssignments;
-			}
-			set
-			{
-				this._JobAssignments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Store", Storage="_Stores", ThisKey="CityID", OtherKey="AssociatedCityID")]
-		public EntitySet<Store> Stores
-		{
-			get
-			{
-				return this._Stores;
-			}
-			set
-			{
-				this._Stores.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1013,30 +714,6 @@ namespace UST_Routing.Data.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_JobAssignments(JobAssignment entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = this;
-		}
-		
-		private void detach_JobAssignments(JobAssignment entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = null;
-		}
-		
-		private void attach_Stores(Store entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = this;
-		}
-		
-		private void detach_Stores(Store entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = null;
 		}
 	}
 	
@@ -1398,9 +1075,9 @@ namespace UST_Routing.Data.Domain
 		
 		private EntitySet<JobAssignmentCheckpoint> _JobAssignmentCheckpoints;
 		
-		private EntityRef<City> _City;
-		
 		private EntityRef<JobAssignmentGroup> _JobAssignmentGroup;
+		
+		private EntityRef<City> _City;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1431,8 +1108,8 @@ namespace UST_Routing.Data.Domain
 		public JobAssignment()
 		{
 			this._JobAssignmentCheckpoints = new EntitySet<JobAssignmentCheckpoint>(new Action<JobAssignmentCheckpoint>(this.attach_JobAssignmentCheckpoints), new Action<JobAssignmentCheckpoint>(this.detach_JobAssignmentCheckpoints));
-			this._City = default(EntityRef<City>);
 			this._JobAssignmentGroup = default(EntityRef<JobAssignmentGroup>);
+			this._City = default(EntityRef<City>);
 			OnCreated();
 		}
 		
@@ -1657,40 +1334,6 @@ namespace UST_Routing.Data.Domain
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_JobAssignment", Storage="_City", ThisKey="AssociatedCityID", OtherKey="CityID", IsForeignKey=true)]
-		public City City
-		{
-			get
-			{
-				return this._City.Entity;
-			}
-			set
-			{
-				City previousValue = this._City.Entity;
-				if (((previousValue != value) 
-							|| (this._City.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City.Entity = null;
-						previousValue.JobAssignments.Remove(this);
-					}
-					this._City.Entity = value;
-					if ((value != null))
-					{
-						value.JobAssignments.Add(this);
-						this._AssociatedCityID = value.CityID;
-					}
-					else
-					{
-						this._AssociatedCityID = default(int);
-					}
-					this.SendPropertyChanged("City");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JobAssignmentGroup_JobAssignment", Storage="_JobAssignmentGroup", ThisKey="JobAssignmentGroupMemberID", OtherKey="AssignmentGroupID", IsForeignKey=true)]
 		public JobAssignmentGroup JobAssignmentGroup
 		{
@@ -1725,6 +1368,40 @@ namespace UST_Routing.Data.Domain
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_JobAssignment", Storage="_City", ThisKey="AssociatedCityID", OtherKey="CityID", IsForeignKey=true)]
+		public City City
+		{
+			get
+			{
+				return this._City.Entity;
+			}
+			set
+			{
+				City previousValue = this._City.Entity;
+				if (((previousValue != value) 
+							|| (this._City.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._City.Entity = null;
+						previousValue.JobAssignments.Remove(this);
+					}
+					this._City.Entity = value;
+					if ((value != null))
+					{
+						value.JobAssignments.Add(this);
+						this._AssociatedCityID = value.CityID;
+					}
+					else
+					{
+						this._AssociatedCityID = default(int);
+					}
+					this.SendPropertyChanged("City");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1755,6 +1432,144 @@ namespace UST_Routing.Data.Domain
 		{
 			this.SendPropertyChanging();
 			entity.JobAssignment = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.States")]
+	public partial class State : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _StateID;
+		
+		private string _Abbreviation;
+		
+		private string _StateName;
+		
+		private EntitySet<City> _Cities;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStateIDChanging(int value);
+    partial void OnStateIDChanged();
+    partial void OnAbbreviationChanging(string value);
+    partial void OnAbbreviationChanged();
+    partial void OnStateNameChanging(string value);
+    partial void OnStateNameChanged();
+    #endregion
+		
+		public State()
+		{
+			this._Cities = new EntitySet<City>(new Action<City>(this.attach_Cities), new Action<City>(this.detach_Cities));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int StateID
+		{
+			get
+			{
+				return this._StateID;
+			}
+			set
+			{
+				if ((this._StateID != value))
+				{
+					this.OnStateIDChanging(value);
+					this.SendPropertyChanging();
+					this._StateID = value;
+					this.SendPropertyChanged("StateID");
+					this.OnStateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abbreviation", DbType="VarChar(2) NOT NULL", CanBeNull=false)]
+		public string Abbreviation
+		{
+			get
+			{
+				return this._Abbreviation;
+			}
+			set
+			{
+				if ((this._Abbreviation != value))
+				{
+					this.OnAbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._Abbreviation = value;
+					this.SendPropertyChanged("Abbreviation");
+					this.OnAbbreviationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateName", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string StateName
+		{
+			get
+			{
+				return this._StateName;
+			}
+			set
+			{
+				if ((this._StateName != value))
+				{
+					this.OnStateNameChanging(value);
+					this.SendPropertyChanging();
+					this._StateName = value;
+					this.SendPropertyChanged("StateName");
+					this.OnStateNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_City", Storage="_Cities", ThisKey="StateID", OtherKey="StateID")]
+		public EntitySet<City> Cities
+		{
+			get
+			{
+				return this._Cities;
+			}
+			set
+			{
+				this._Cities.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Cities(City entity)
+		{
+			this.SendPropertyChanging();
+			entity.State = this;
+		}
+		
+		private void detach_Cities(City entity)
+		{
+			this.SendPropertyChanging();
+			entity.State = null;
 		}
 	}
 	
@@ -1978,6 +1793,405 @@ namespace UST_Routing.Data.Domain
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cities")]
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CityID;
+		
+		private string _CityName;
+		
+		private string _ImagePath;
+		
+		private int _LegacyLocationID;
+		
+		private string _LegacyLocationMoniker;
+		
+		private int _StateID;
+		
+		private string _StateAbbrevOld;
+		
+		private System.Nullable<long> _Latitude;
+		
+		private System.Nullable<long> _Longitude;
+		
+		private System.Nullable<int> _TimeZoneOffset;
+		
+		private bool _Inferred;
+		
+		private EntitySet<JobAssignment> _JobAssignments;
+		
+		private EntitySet<Store> _Stores;
+		
+		private EntityRef<State> _State;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCityIDChanging(int value);
+    partial void OnCityIDChanged();
+    partial void OnCityNameChanging(string value);
+    partial void OnCityNameChanged();
+    partial void OnImagePathChanging(string value);
+    partial void OnImagePathChanged();
+    partial void OnLegacyLocationIDChanging(int value);
+    partial void OnLegacyLocationIDChanged();
+    partial void OnLegacyLocationMonikerChanging(string value);
+    partial void OnLegacyLocationMonikerChanged();
+    partial void OnStateIDChanging(int value);
+    partial void OnStateIDChanged();
+    partial void OnStateAbbrevOldChanging(string value);
+    partial void OnStateAbbrevOldChanged();
+    partial void OnLatitudeChanging(System.Nullable<long> value);
+    partial void OnLatitudeChanged();
+    partial void OnLongitudeChanging(System.Nullable<long> value);
+    partial void OnLongitudeChanged();
+    partial void OnTimeZoneOffsetChanging(System.Nullable<int> value);
+    partial void OnTimeZoneOffsetChanged();
+    partial void OnInferredChanging(bool value);
+    partial void OnInferredChanged();
+    #endregion
+		
+		public City()
+		{
+			this._JobAssignments = new EntitySet<JobAssignment>(new Action<JobAssignment>(this.attach_JobAssignments), new Action<JobAssignment>(this.detach_JobAssignments));
+			this._Stores = new EntitySet<Store>(new Action<Store>(this.attach_Stores), new Action<Store>(this.detach_Stores));
+			this._State = default(EntityRef<State>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CityID
+		{
+			get
+			{
+				return this._CityID;
+			}
+			set
+			{
+				if ((this._CityID != value))
+				{
+					this.OnCityIDChanging(value);
+					this.SendPropertyChanging();
+					this._CityID = value;
+					this.SendPropertyChanged("CityID");
+					this.OnCityIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityName", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string CityName
+		{
+			get
+			{
+				return this._CityName;
+			}
+			set
+			{
+				if ((this._CityName != value))
+				{
+					this.OnCityNameChanging(value);
+					this.SendPropertyChanging();
+					this._CityName = value;
+					this.SendPropertyChanged("CityName");
+					this.OnCityNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagePath", DbType="VarChar(400) NOT NULL", CanBeNull=false)]
+		public string ImagePath
+		{
+			get
+			{
+				return this._ImagePath;
+			}
+			set
+			{
+				if ((this._ImagePath != value))
+				{
+					this.OnImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._ImagePath = value;
+					this.SendPropertyChanged("ImagePath");
+					this.OnImagePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegacyLocationID", DbType="Int NOT NULL")]
+		public int LegacyLocationID
+		{
+			get
+			{
+				return this._LegacyLocationID;
+			}
+			set
+			{
+				if ((this._LegacyLocationID != value))
+				{
+					this.OnLegacyLocationIDChanging(value);
+					this.SendPropertyChanging();
+					this._LegacyLocationID = value;
+					this.SendPropertyChanged("LegacyLocationID");
+					this.OnLegacyLocationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LegacyLocationMoniker", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string LegacyLocationMoniker
+		{
+			get
+			{
+				return this._LegacyLocationMoniker;
+			}
+			set
+			{
+				if ((this._LegacyLocationMoniker != value))
+				{
+					this.OnLegacyLocationMonikerChanging(value);
+					this.SendPropertyChanging();
+					this._LegacyLocationMoniker = value;
+					this.SendPropertyChanged("LegacyLocationMoniker");
+					this.OnLegacyLocationMonikerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateID", DbType="Int NOT NULL")]
+		public int StateID
+		{
+			get
+			{
+				return this._StateID;
+			}
+			set
+			{
+				if ((this._StateID != value))
+				{
+					if (this._State.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStateIDChanging(value);
+					this.SendPropertyChanging();
+					this._StateID = value;
+					this.SendPropertyChanged("StateID");
+					this.OnStateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateAbbrevOld", DbType="VarChar(30)")]
+		public string StateAbbrevOld
+		{
+			get
+			{
+				return this._StateAbbrevOld;
+			}
+			set
+			{
+				if ((this._StateAbbrevOld != value))
+				{
+					this.OnStateAbbrevOldChanging(value);
+					this.SendPropertyChanging();
+					this._StateAbbrevOld = value;
+					this.SendPropertyChanged("StateAbbrevOld");
+					this.OnStateAbbrevOldChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="BigInt")]
+		public System.Nullable<long> Latitude
+		{
+			get
+			{
+				return this._Latitude;
+			}
+			set
+			{
+				if ((this._Latitude != value))
+				{
+					this.OnLatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Latitude = value;
+					this.SendPropertyChanged("Latitude");
+					this.OnLatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="BigInt")]
+		public System.Nullable<long> Longitude
+		{
+			get
+			{
+				return this._Longitude;
+			}
+			set
+			{
+				if ((this._Longitude != value))
+				{
+					this.OnLongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._Longitude = value;
+					this.SendPropertyChanged("Longitude");
+					this.OnLongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeZoneOffset", DbType="Int")]
+		public System.Nullable<int> TimeZoneOffset
+		{
+			get
+			{
+				return this._TimeZoneOffset;
+			}
+			set
+			{
+				if ((this._TimeZoneOffset != value))
+				{
+					this.OnTimeZoneOffsetChanging(value);
+					this.SendPropertyChanging();
+					this._TimeZoneOffset = value;
+					this.SendPropertyChanged("TimeZoneOffset");
+					this.OnTimeZoneOffsetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Inferred", DbType="Bit NOT NULL")]
+		public bool Inferred
+		{
+			get
+			{
+				return this._Inferred;
+			}
+			set
+			{
+				if ((this._Inferred != value))
+				{
+					this.OnInferredChanging(value);
+					this.SendPropertyChanging();
+					this._Inferred = value;
+					this.SendPropertyChanged("Inferred");
+					this.OnInferredChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_JobAssignment", Storage="_JobAssignments", ThisKey="CityID", OtherKey="AssociatedCityID")]
+		public EntitySet<JobAssignment> JobAssignments
+		{
+			get
+			{
+				return this._JobAssignments;
+			}
+			set
+			{
+				this._JobAssignments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Store", Storage="_Stores", ThisKey="CityID", OtherKey="AssociatedCityID")]
+		public EntitySet<Store> Stores
+		{
+			get
+			{
+				return this._Stores;
+			}
+			set
+			{
+				this._Stores.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="State_City", Storage="_State", ThisKey="StateID", OtherKey="StateID", IsForeignKey=true)]
+		public State State
+		{
+			get
+			{
+				return this._State.Entity;
+			}
+			set
+			{
+				State previousValue = this._State.Entity;
+				if (((previousValue != value) 
+							|| (this._State.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._State.Entity = null;
+						previousValue.Cities.Remove(this);
+					}
+					this._State.Entity = value;
+					if ((value != null))
+					{
+						value.Cities.Add(this);
+						this._StateID = value.StateID;
+					}
+					else
+					{
+						this._StateID = default(int);
+					}
+					this.SendPropertyChanged("State");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_JobAssignments(JobAssignment entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = this;
+		}
+		
+		private void detach_JobAssignments(JobAssignment entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = null;
+		}
+		
+		private void attach_Stores(Store entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = this;
+		}
+		
+		private void detach_Stores(Store entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = null;
 		}
 	}
 }
